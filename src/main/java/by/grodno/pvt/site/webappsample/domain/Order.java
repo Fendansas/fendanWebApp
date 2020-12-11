@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="ORDER_TABLE")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -48,7 +48,7 @@ public class UsersController {
 
 		model.addAttribute("users", users);
 
-		return "userList";
+		return "users";
 	}
 
 	@PostMapping("/users/{id}/img")
