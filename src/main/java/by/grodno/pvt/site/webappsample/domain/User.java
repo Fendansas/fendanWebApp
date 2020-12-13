@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -35,12 +36,12 @@ public class User {
 	@Column(nullable = false)
 	private Role role;
 
-	private Integer maney;
+	private BigDecimal money;
 
 	private String avatarFileName;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ownerUser")
-    private List<Credentials> credentials;
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ownerUser")
+	private List<Credentials> credentials;
 
 	@OneToOne
 	@JoinColumn(name = "users_id")

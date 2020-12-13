@@ -30,7 +30,7 @@
         <td th:text="${user.lastName}" />
         <td th:text="${user.login}" />
         <td th:text="${user.role}" />
-        <td th:text="${user.money}" />
+        <td th:text="${user.maney}" />
         <td>
             <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${user.id})}">
                 <table>

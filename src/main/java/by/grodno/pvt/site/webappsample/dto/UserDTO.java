@@ -4,6 +4,8 @@ package by.grodno.pvt.site.webappsample.dto;
 import by.grodno.pvt.site.webappsample.domain.Role;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class UserDTO {
 
@@ -12,7 +14,7 @@ public class UserDTO {
     private String lastName;
     private String login;
     private Role role;
-    private Integer maney;
+    private BigDecimal money;
 
 
 }

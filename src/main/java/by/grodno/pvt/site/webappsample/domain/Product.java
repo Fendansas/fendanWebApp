@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -20,8 +21,11 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
+    @Column
+    private String description;
+
     @Column(nullable = false)
-    private Integer price;
+    private BigDecimal price;
 
     @OneToMany(targetEntity=ItemInOrder.class,mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<ItemInOrder> itemInOrders;

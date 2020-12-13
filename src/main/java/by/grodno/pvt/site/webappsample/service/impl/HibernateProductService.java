@@ -43,7 +43,7 @@ public class HibernateProductService implements ProductRepository {
 
     @Override
     public void deleteProduct(Integer number) {
-        entityManager.remove(new Product(number, null, null, null));
+        entityManager.remove(new Product(number, null, null, null,null));
     }
 
     @Override
