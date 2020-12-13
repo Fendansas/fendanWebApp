@@ -11,36 +11,32 @@
 <table class="table">
     <thead class="thead-dark">
     <tr>
-        <th scope="col">Image</th>
         <th scope="col">Id</th>
-        <th scope="col">Firstname</th>
-        <th scope="col">Lastname</th>
-        <th scope="col">Login</th>
-        <th scope="col">Role</th>
-        <th scope="col">Money</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
         <th scope="col">Image upload</th>
     </tr>
     </thead>
 
-    <tr th:each="user : ${users}">
-        <td><img th:src="@{/users/{uid}/img(uid=${user.id})}" width="100"
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"/>
+        <td><img th:src="@{/products/{uid}/img(uid=${product.id})}" width="100"
                  height="100" alt=""></td>
-        <td th:text="${user.id}" />
-        <td th:text="${user.firstName}" />
-        <td th:text="${user.lastName}" />
-        <td th:text="${user.login}" />
-        <td th:text="${user.role}" />
-        <td th:text="${user.maney}" />
+        <td th:text="${product.name}"/>
+        <td th:text="${product.price}"/>
+        <td th:text="${product.description}"/>
         <td>
-            <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${user.id})}">
+            <form method="POST" enctype="multipart/form-data" th:action="@{/products/{uid}/img(uid=${product.id})}">
                 <table>
                     <tr>
                         <td>File to upload:</td>
-                        <td><input type="file" name="file" /></td>
+                        <td><input type="file" name="file"/></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value="Upload" /></td>
+                        <td><input type="submit" value="Upload"/></td>
                     </tr>
                 </table>
             </form>

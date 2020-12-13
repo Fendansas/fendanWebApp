@@ -13,4 +13,11 @@ public class ReportingService {
 	public Integer getAllUsersCount() {
 		return jdbcUserService.getUsers().size();
 	}
+
+	@Autowired
+	private ProductService jdbcProductService;
+
+	public Integer getAllProductsCount(){
+		return jdbcProductService.getProducts().size();
+	}
 }
