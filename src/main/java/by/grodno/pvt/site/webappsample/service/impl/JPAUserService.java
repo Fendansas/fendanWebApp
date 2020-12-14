@@ -59,9 +59,9 @@ public class JPAUserService implements UserService, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        User User = new User(null, "Vasia","Ivanovich", "fendansas1@mail.ru","fendansas", Role.SELLER, new BigDecimal(1500), null,null,null);
-        User User2 = new User(null, "Sergey", "Danilchik", "fendansas@mail.ru", "qwertyu", Role.USER, new BigDecimal(1500), null,null,null);
-        User User3 = new User(null, "Ivan", "Ivanov", "fendan@gmail.com", "zxcvbnm", Role.USER, new BigDecimal(1500), null,null,null);
+        User User = new User(null, "Vasia","Ivanovich", "fendansas1@mail.ru","fendansas", Role.SELLER, new BigDecimal(1500), null,null,null,null);
+        User User2 = new User(null, "Sergey", "Danilchik", "fendansas@mail.ru", "qwertyu", Role.USER, new BigDecimal(1500), null,null,null,null);
+        User User3 = new User(null, "Ivan", "Ivanov", "fendan@gmail.com", "zxcvbnm", Role.USER, new BigDecimal(1500), null,null,null,null);
         repo.save(User);
         repo.save(User2);
         repo.save(User3);

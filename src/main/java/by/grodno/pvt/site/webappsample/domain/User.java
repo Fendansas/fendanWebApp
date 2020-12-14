@@ -43,6 +43,10 @@ public class User {
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ownerUser")
 	private List<Credentials> credentials;
 
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "postUser")
+	private List<Post> posts;
+
+
 	@OneToOne
 	@JoinColumn(name = "users_id")
 	private Order order;
