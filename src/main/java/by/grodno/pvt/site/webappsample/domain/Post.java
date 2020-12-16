@@ -29,4 +29,8 @@ public class Post {
 
 
 
+    public Post(String title, String full_text) {
+        this.title = title;
+        this.full_text = full_text;
+    }
 }
