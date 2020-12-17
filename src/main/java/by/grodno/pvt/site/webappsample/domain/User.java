@@ -10,6 +10,13 @@ import javax.validation.constraints.Email;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -24,6 +31,8 @@ public class User {
 	private String firstName;
 
 	private String lastName;
+
+	private String password;
 
 	@Email
 	@Column(nullable = false, unique = true)

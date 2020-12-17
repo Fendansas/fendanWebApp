@@ -1,5 +1,5 @@
 package by.grodno.pvt.site.webappsample.service;
-
+import java.util.Optional;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -25,4 +25,6 @@ public interface UserService {
     Page<User> getPage(Integer pageNum, Integer pageSize);
 
     List<User> findByFName(String fname);
+
+    Optional<User> findByUserName(String userName);
 }

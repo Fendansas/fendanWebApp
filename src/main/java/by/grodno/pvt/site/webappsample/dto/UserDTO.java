@@ -15,6 +15,13 @@ public class UserDTO {
     private String login;
     private Role role;
     private BigDecimal money;
+    private String password;
 
+    public Role getRole() {
+        return role;
+    }
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

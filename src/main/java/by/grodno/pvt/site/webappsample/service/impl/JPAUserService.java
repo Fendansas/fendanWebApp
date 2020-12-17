@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -59,9 +60,9 @@ public class JPAUserService implements UserService, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        User User = new User(null, "Vasia","Ivanovich", "fendansas1@mail.ru","fendansas", Role.SELLER, new BigDecimal(1500), null,null,null,null);
-        User User2 = new User(null, "Sergey", "Danilchik", "fendansas@mail.ru", "qwertyu", Role.USER, new BigDecimal(1500), null,null,null,null);
-        User User3 = new User(null, "Ivan", "Ivanov", "fendan@gmail.com", "zxcvbnm", Role.USER, new BigDecimal(1500), null,null,null,null);
+        User User = new User(null, "Vasia","Ivanovich", "sas","fendan1@mail.ru","fendansas",Role.ADMIN,new BigDecimal(1000),null,null,null,null);
+        User User2 = new User(null, "Saha","sdsds", "pap","fendan2@mail.ru","fendansas1",Role.USER,new BigDecimal(1000),null,null,null,null);
+        User User3 = new User(null, "Sergey","sdsdqw", "rar","fendan2@mail.ru","fendansas2",Role.SELLER,new BigDecimal(1000),null,null,null,null);
         repo.save(User);
         repo.save(User2);
         repo.save(User3);
@@ -78,5 +79,10 @@ public class JPAUserService implements UserService, InitializingBean {
     public void saveUser(User user) {
         repo.save(user);
 
+    }
+
+    @Override
+    public Optional<User> findByUserName(String userName) {
+        return repo.findByUsername(userName);
     }
 }
