@@ -1,65 +1,72 @@
 package by.grodno.pvt.site.webappsample.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "user_table")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	private String firstName;
+    private String firstName;
+    private String lastName;
 
-	private String lastName;
+    @Email
+    @Column(nullable = false, unique = true)
+    private String email;
 
-	private String password;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "u1"),
+            inverseJoinColumns = @JoinColumn(name = "u2"))
+    private List<Credentials> credentials;
 
-	@Email
-	@Column(nullable = false, unique = true)
-	private String email;
+    @Column(nullable = false)
+    private Role role;
 
-	@Length(min = 6, max = 20)
-	@Column(nullable = false, unique = true, updatable = false)
-	private String login;
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    private Picture picture;
 
-	@Column(nullable = false)
-	private Role role;
+    private BigDecimal money;
 
-	private BigDecimal money;
-
-	private String avatarFileName;
-
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ownerUser")
-	private List<Credentials> credentials;
-
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "postUser")
-	private List<Post> posts;
+    private String avatarFileName; // удалить, пока работает так
 
 
-	@OneToOne
-	@JoinColumn(name = "users_id")
-	private Order order;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "postUser")
+    private List<Post> posts;
 
+
+    @OneToOne
+    @JoinColumn(name = "users_id")
+    private Order order;
+
+    private Date birthdate;
 
 
 }

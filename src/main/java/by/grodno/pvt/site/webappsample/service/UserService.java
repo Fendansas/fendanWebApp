@@ -10,6 +10,7 @@ import by.grodno.pvt.site.webappsample.domain.User;
 
 
 public interface UserService {
+
     List<User> getUsers();
 
     User getUser(Integer id);
@@ -20,11 +21,7 @@ public interface UserService {
 
     void deleteUser(Integer number);
 
-    List<User> findByExample(User userSample);
+    Optional<User> findByEmail(String email);
 
-    Page<User> getPage(Integer pageNum, Integer pageSize);
-
-    List<User> findByFName(String fname);
-
-    Optional<User> findByUserName(String userName);
+    void activateUser(Integer id);
 }
