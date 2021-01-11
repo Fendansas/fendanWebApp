@@ -18,17 +18,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/post", "/products", "/register", "/register/**", "/activate/**")
-                .permitAll()
-                .and()
+                    .antMatchers("/", "/post", "/products", "/register", "/register/**", "/activate/**","/login",
+                        "/webjars/**").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .defaultSuccessUrl("/users")
-                .and()
+                    .loginPage("/login")
+                    .permitAll()
+                    .defaultSuccessUrl("/")
+                    .and()
                 .logout()
-                .permitAll();
-
+                    .permitAll();
     }
 
     @SuppressWarnings("deprecation")
@@ -36,5 +36,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PasswordEncoder noop() {
         return NoOpPasswordEncoder.getInstance();
     }
-
 }
+// "/", "/post", "/products", "/register", "/register/**", "/activate/**"

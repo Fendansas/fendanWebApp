@@ -6,10 +6,12 @@ import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.dto.UserRegistrationDTO;
 import by.grodno.pvt.site.webappsample.repo.UserCredentialsRepo;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.Date;
 
+@Component
 public class UserRegistrationDTOToUserConverter implements Converter<UserRegistrationDTO, User> {
 
     @Override

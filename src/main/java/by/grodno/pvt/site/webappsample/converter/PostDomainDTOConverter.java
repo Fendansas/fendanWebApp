@@ -5,7 +5,10 @@ import by.grodno.pvt.site.webappsample.dto.PostDTO;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class PostDomainDTOConverter implements Converter<Post, PostDTO> {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();

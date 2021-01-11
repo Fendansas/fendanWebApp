@@ -22,7 +22,7 @@
         <th scope="col">Id</th>
         <th scope="col">Firstname</th>
         <th scope="col">Lastname</th>
-        <th scope="col">Male</th>
+
         <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Upload img</th>
     </tr>
     </thead>
@@ -33,7 +33,7 @@
         <td th:text="${user.id}" />
         <td th:text="${user.firstName}" />
         <td th:text="${user.lastName}" />
-        <td th:text="${user.male}" />
+
         <td sec:authorize="hasRole('ROLE_ADMIN')">
             This content is only shown to administrators.
             <form method="POST" enctype="multipart/form-data"

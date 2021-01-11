@@ -55,11 +55,19 @@ public class JPAUserService implements UserService, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        User oldUser = new User(null,"Sergey", "DAnilhcik", "fendan@mail.ru",null
+        User oldUser = new User(null,"Sergey", "Danilhcik", "fendan@mail.ru",null
                 , Role.ADMIN,null,new BigDecimal(1000),null,null, new Date());
         Credentials userCredentials = new Credentials(null,  new Date(), true, "123");
         oldUser.setCredentials(Collections.singletonList(userCredentials));
         repo.save(oldUser);
+
+        User oldUser1 = new User(null,"Misha", "Dmeh", "fendansas@mail.ru",null
+                , Role.USER,null,new BigDecimal(10000),null,null, new Date());
+        Credentials userCredentials1 = new Credentials(null,  new Date(), true, "123");
+        oldUser.setCredentials(Collections.singletonList(userCredentials));
+        repo.save(oldUser1);
+
+
     }
 
     @Override

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title th:text="${title}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -16,7 +16,8 @@
         <th scope="col">Name</th>
         <th scope="col">Price</th>
         <th scope="col">Description</th>
-        <th scope="col">Image upload</th>
+        <th scope="col">Add to cart</th>
+        <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Upload img</th>
     </tr>
     </thead>
 
@@ -28,7 +29,12 @@
         <td th:text="${product.price}"/>
         <td th:text="${product.description}"/>
         <td>
-            <form method="POST" enctype="multipart/form-data" th:action="@{/products/{uid}/img(uid=${product.id})}">
+            <button type="button" class="btn btn-success">Add to cart</button>
+        </td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')">
+            This content is only shown to administrators.
+            <form method="POST" enctype="multipart/form-data"
+                  th:action="@{/users/{uid}/img(uid=${user.id})}">
                 <table>
                     <tr>
                         <td>File to upload:</td>
@@ -42,8 +48,13 @@
             </form>
         </td>
     </tr>
+
+
 </table>
-footer <header th:insert="blocks/footer::footer"></header>
+footer
+<header th:insert="blocks/footer::footer"></header>
 </body>
+
+
 
 </html>
