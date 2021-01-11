@@ -13,11 +13,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.resource.HttpResource;
 
@@ -48,7 +44,7 @@ public class UsersController {
 
 		model.addAttribute("users", users);
 
-		return "users";
+		return "usersList";
 	}
 
 	@PostMapping("/users/{id}/img")
@@ -68,5 +64,12 @@ public class UsersController {
 			}
 		}
 	}
+
+	@GetMapping("/apis/v1/users")
+    @ResponseBody
+    public List<UserDTO> getAllUsers() {
+	    return userService.getUsers().stream().map(u-> convertionService.convert(u,UserDTO.class))
+                .collect(Collectors.toList());
+    }
 
 }

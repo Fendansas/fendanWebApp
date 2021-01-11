@@ -13,17 +13,17 @@ import by.grodno.pvt.site.webappsample.dto.UserDTO;
 @Component
 public class UserDomainToDTOConverter implements Converter<User, UserDTO> {
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Override
-    public UserDTO convert(User source) {
+    public UserDTO convert(User user) {
 
-        MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
 
-        MAPPER.setSerializationInclusion(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL);
-        return MAPPER.convertValue(source, UserDTO.class);
+        return userDTO;
     }
-
 }
 
 //    private String login;

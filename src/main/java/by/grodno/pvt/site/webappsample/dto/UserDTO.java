@@ -12,10 +12,8 @@ public class UserDTO {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String login;
     private Role role;
     private BigDecimal money;
-
 
 
 }

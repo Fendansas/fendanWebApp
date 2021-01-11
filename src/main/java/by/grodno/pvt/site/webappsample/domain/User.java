@@ -38,7 +38,7 @@ public class User {
     private String lastName;
 
     @Email
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -47,7 +47,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "u2"))
     private List<Credentials> credentials;
 
-    @Column(nullable = false)
+
     private Role role;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
@@ -55,10 +55,7 @@ public class User {
 
     private BigDecimal money;
 
-    private String avatarFileName; // удалить, пока работает так
-
-
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "postUser")
+       @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "postUser")
     private List<Post> posts;
 
 

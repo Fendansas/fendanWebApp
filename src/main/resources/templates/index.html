@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+
+<body>
+<header th:insert="blocks/header::header"></header>
+
+<th:block th:insert="fragments/navBar.html :: navBar" />
+
+<p>
+    Hello. Choose something in menu please!
+</p>
+
+
+<br />
+<br />
+
+
+<th:block th:insert="fragments/scripts.html :: js" />
+
+</body>
+</html>

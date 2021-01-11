@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+
+<body>
+<header th:insert="blocks/header::header"></header>
+
+
+<p>
+    Hello, <span sec:authentication="principal.username">Udefined</span>!
+</p>
+
+
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Id</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Male</th>
+        <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Upload img</th>
+    </tr>
+    </thead>
+
+    <tr th:each="user : ${users}">
+        <td><img th:src="@{/users/{uid}/img(uid=${user.id})}"
+                 width="100" height="100" alt=""></td>
+        <td th:text="${user.id}" />
+        <td th:text="${user.firstName}" />
+        <td th:text="${user.lastName}" />
+        <td th:text="${user.male}" />
+        <td sec:authorize="hasRole('ROLE_ADMIN')">
+            This content is only shown to administrators.
+            <form method="POST" enctype="multipart/form-data"
+                  th:action="@{/users/{uid}/img(uid=${user.id})}">
+                <table>
+                    <tr>
+                        <td>File to upload:</td>
+                        <td><input type="file" name="file" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Upload" /></td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<br />
+<br />
+</body>
+</html>
