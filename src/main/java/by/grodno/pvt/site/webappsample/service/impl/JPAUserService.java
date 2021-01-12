@@ -64,7 +64,7 @@ public class JPAUserService implements UserService, InitializingBean {
         User oldUser1 = new User(null,"Misha", "Dmeh", "fendansas@mail.ru",null
                 , Role.USER,null,new BigDecimal(10000),null,null, new Date());
         Credentials userCredentials1 = new Credentials(null,  new Date(), true, "123");
-        oldUser.setCredentials(Collections.singletonList(userCredentials));
+        oldUser.setCredentials(Collections.singletonList(userCredentials1));
         repo.save(oldUser1);
 
 

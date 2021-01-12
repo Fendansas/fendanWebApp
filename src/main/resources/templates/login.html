@@ -12,19 +12,40 @@
 
 <div th:if="${param.error}">Invalid username and password.</div>
 <div th:if="${param.logout}">You have been logged out.</div>
-<form th:action="@{/login}" method="post">
-    <div>
-        <label> User Name : <input type="text" name="email"/>
-        </label>
-    </div>
-    <div>
-        <label> Password: <input type="password" name="password"/>
-        </label>
-    </div>
-    <div>
-        <input type="submit" value="Sign In"/>
-    </div>
+
+<form method="POST"
+      th:action="@{/login}">
+    <table>
+        <tr>
+            <td>Email *</td>
+            <td><input name="email" /></td>
+        </tr>
+        <tr>
+            <td>Password *</td>
+            <td><input type="password" name="password" /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="Login" />
+                <input type="reset"  value="Reset" />
+            </td>
+        </tr>
+    </table>
 </form>
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <div>-->
+<!--        <label> User Name : <input type="text" name="email"/>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label> Password: <input type="password" name="password"/>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <input type="submit" value="Sign In"/>-->
+<!--    </div>-->
+<!--</form>-->
 <a th:href="@{/register}">Register new user</a>
 
  </body>
