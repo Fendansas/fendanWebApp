@@ -17,6 +17,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class PostController {
+
+
+
     @Autowired
     private PostService postService;
     @Autowired
@@ -34,15 +37,16 @@ public class PostController {
 
     }
 
+
     @GetMapping("/post/add")
     public String postAdd(Model model){
         return "post-add";
     }
 
-//    @PostMapping("/post/add")
-//    public String articlePostAdd(@RequestParam String title, @RequestParam String full_text, Model model){
-//        Post post = new Post (title, full_text);
-//        postRepo.save(getpost);
-//        return "redirect:/post";
-//    }
+    @PostMapping("/post/add")
+    public String articlePostAdd(@RequestParam String title, @RequestParam String full_text, Model model){
+        Post post = new Post (title, full_text);
+        postService.savePost(post);
+        return "redirect:/post";
+    }
 }
