@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -26,11 +27,16 @@ public class Product {
 
     private String avatarFileName;
 
-    @Column(nullable = false)
+   // @Column(nullable = false)
     private BigDecimal price;
 
-    @OneToMany(targetEntity=ItemInOrder.class,mappedBy = "product", cascade = CascadeType.REMOVE)
-    private List<ItemInOrder> itemInOrders;
+    @Column(name = "quantity", nullable = false)
+    @Min(value = 0, message = "*Quantity has to be non negative number")
+    private Integer quantity;
+
+
+//    @OneToMany(targetEntity=ItemInOrder.class,mappedBy = "product", cascade = CascadeType.REMOVE)
+//    private List<ItemInOrder> itemInOrders;
 
 
 }

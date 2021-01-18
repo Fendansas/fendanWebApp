@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<th:block th:insert="fragments/header.html :: css" />
+
+<body>
+
+<th:block th:insert="fragments/navBar.html :: navBar" />
+
+<p class="row">You want to sell nexxt users:</p>
+
+<div class="container">
+    <div class="row">
+
+        <div class="border col-lg-2">Id</div>
+        <div class="border col-lg-5">Name</div>
+        <div class="border col-lg-5">Price</div>
+
+    </div>
+
+    <div class="row" th:each="product : ${products}">
+
+        <div class="border col-lg-2" th:text="${product.id}"></div>
+        <div class="border col-lg-5" th:text="${product.Name}"></div>
+        <div class="border col-lg-5" th:text="${product.price}"></div>
+
+    </div>
+
+</div>
+
+
+<br />
+<br />
+
+
+<a class="btn btn-primary" th:href="@{/sold/apply}">Perform Action</a>
+
+
+</body>
+</html>

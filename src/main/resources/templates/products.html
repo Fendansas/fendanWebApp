@@ -1,60 +1,102 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title th:text="${title}"/>
+    <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 </head>
 
+<th:block th:insert="fragments/header.html :: css"/>
+
 <body>
-<header th:insert="blocks/header::header"></header>
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Image</th>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Description</th>
-        <th scope="col">Add to cart</th>
-        <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Upload img</th>
-    </tr>
-    </thead>
 
-    <tr th:each="product : ${products}">
-        <td th:text="${product.id}"/>
-        <td><img th:src="@{/products/{uid}/img(uid=${product.id})}" width="100"
-                 height="100" alt=""></td>
-        <td th:text="${product.name}"/>
-        <td th:text="${product.price}"/>
-        <td th:text="${product.description}"/>
-        <td>
-            <button type="button" class="btn btn-success">Add to cart</button>
-        </td>
-        <td sec:authorize="hasRole('ROLE_ADMIN')">
-            This content is only shown to administrators.
+<th:block th:insert="fragments/navBar.html :: navBar"/>
+
+</div>
+
+<div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
+    <!--    заголовок таблицы-->
+    <div class="row">
+        <div class="border col-lg-1">Id</div>
+        <div class="border col-lg-1">Image</div>
+        <div class="border col-lg-1">
+            <a class="p-2" th:href="@{'/products'+'?fieldName=Name'}">Name</a>
+        </div>
+        <div class="border col-lg-2">Description</div>
+        <div class="border col-lg-1">Price</div>
+        <div class="border col-lg-1">In Stock</div>
+        <div class="border col-lg-1">Edit</div>
+        <div class="border col-lg-1">Delete</div>
+        <div class="border col-lg-3" >Upload img</div>
+
+    </div>
+
+    <!--           Внутрянка таблицы-->
+
+    <div class="row" th:each="product : ${products}">
+
+        <div class="border col-lg-1" th:text="${product.id}"></div>
+
+        <div class="border justify-content-center col-lg-1 p-1">
+            <img th:src="@{/products/{uid}/img(uid=${product.id})}" width="75"
+                 height="75" alt="">
+        </div>
+
+        <div class="border col-lg-1" th:text="${product.name}"></div>
+        <div class="border col-lg-2" th:text="${product.description}"></div>
+        <div class="border col-lg-1" th:text="${product.price}"></div>
+        <div class="border col-lg-1" th:text="${product.quantity}"></div>
+        <div class="border col-lg-1">
+            <a class="btn btn-link"
+               th:href="@{/products/edit/{uid}(uid=${product.id})}">Edit</a>
+        </div>
+
+        <a class="border col-lg-1" th:href="@{'/deleteproduct/'+${product.id}}"> del</a>
+
+
+        <div class="border col-lg-3" >
             <form method="POST" enctype="multipart/form-data"
-                  th:action="@{/users/{uid}/img(uid=${user.id})}">
-                <table>
-                    <tr>
-                        <td>File to upload:</td>
-                        <td><input type="file" name="file"/></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="submit" value="Upload"/></td>
-                    </tr>
-                </table>
+                  th:action="@{/product/{uid}/img(uid=${product.id})}">
+                <div class="custom-file">
+                    <div class="col-lg-7 p-2">
+                        <input type="file" class="custom-file-input"
+                               id="inputGroupFile03"> <label class="custom-file-label"
+                                                             for="inputGroupFile03">Choose file</label>
+                    </div>
+                    <input type="submit" value="Upload" />
+                </div>
             </form>
-        </td>
-    </tr>
+        </div>
 
 
-</table>
-footer
-<header th:insert="blocks/footer::footer"></header>
+    </div>
+
+
+
+
+
+    <!-- Старницы-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <div class="row p-2">
+                Choose page: <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+
+				<a class="p-2" th:if="${currentPage + 1 != i}"
+                   th:href="@{'/products'+'?pn='+${i}}">[[${i}]]</a> <span class="p-2 "
+                                                                               th:unless="${currentPage + 1 != i}">[[${i}]]</span>
+			</span>
+
+            </div>
+        </ul>
+    </nav>
+</div>
+<br/>
+<br/>
+
+
+<th:block th:insert="fragments/scripts.html :: js"/>
+
+
+
 </body>
-
-
-
 </html>

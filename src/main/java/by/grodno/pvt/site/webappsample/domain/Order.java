@@ -1,29 +1,33 @@
-package by.grodno.pvt.site.webappsample.domain;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name="ORDER_TABLE")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
-
-    @OneToMany(targetEntity=ItemInOrder.class,mappedBy = "product", cascade = CascadeType.REMOVE)
-    private List<ItemInOrder> itemInOrders;
-
-    @OneToOne(mappedBy = "order")
-    private User user;
-
-
-
-}
-
+package by.grodno.pvt.site.webappsample.domain;//package by.grodno.pvt.site.webappsample.domain;
+//
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//import javax.persistence.*;
+//import java.util.Date;
+//import java.util.List;
+//
+//
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity
+//@Table(name = "order")
+//public class Order {
+//
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    private Integer id;
+//
+//    private Date creationDate;
+//
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(
+//            joinColumns = @JoinColumn(name = "p1"),
+//            inverseJoinColumns = @JoinColumn(name = "p2"))
+//    private List<Product> productsOrder;
+//
+//
+//
+//}

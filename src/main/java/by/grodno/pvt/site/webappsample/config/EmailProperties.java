@@ -8,10 +8,10 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "email.server")
 public class EmailProperties {
 
-    String host;
-    String port;
-    String domainHost;
-    String username;
-    String password;
+	String host;
+	String port;
+	String domainHost;
+	String username;
+	String password;
 
 }

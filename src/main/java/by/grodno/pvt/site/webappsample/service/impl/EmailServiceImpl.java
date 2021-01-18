@@ -23,60 +23,59 @@ import by.grodno.pvt.site.webappsample.service.EmailService;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    @Autowired
-    private EmailProperties emailConfig;
+	@Autowired
+	private EmailProperties emailConfig;
 
-    @Override
-    public void sendUserActivationEmail(User user) {
+	@Override
+	public void sendUserActivationEmail(User user) {
 
-        String to = user.getEmail();
-        String from = "no-reply@student.com";
+		String to = user.getEmail();
+		String from = "no-reply@student.com";
 
-        // Get system properties
-        final String username = emailConfig.getUsername();
-        final String password = emailConfig.getPassword();
+		// Get system properties
+		final String username = emailConfig.getUsername();
+		final String password = emailConfig.getPassword();
 
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host", emailConfig.getHost());
-        prop.put("mail.smtp.port", emailConfig.getPort());
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true");
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", emailConfig.getHost());
+		prop.put("mail.smtp.port", emailConfig.getPort());
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.starttls.enable", "true");
 
-        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
+		Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
 
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
+		try {
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
 
-            message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.setFrom(new InternetAddress(from));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            message.setSubject("Activation link for Students.com");
+			message.setSubject("Activation link for Students.com");
 
-            MimeBodyPart mimeBodyPart = new MimeBodyPart();
-            mimeBodyPart.setContent(getMessage(user), "text/html");
+			MimeBodyPart mimeBodyPart = new MimeBodyPart();
+			mimeBodyPart.setContent(getMessage(user), "text/html");
 
-            Multipart multipart = new MimeMultipart();
-            multipart.addBodyPart(mimeBodyPart);
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(mimeBodyPart);
 
-            message.setContent(multipart);
+			message.setContent(multipart);
 
-            Transport.send(message);
-        } catch (MessagingException mex) {
-            throw new RuntimeException(mex);
-        }
+			Transport.send(message);
+		} catch (MessagingException mex) {
+			throw new RuntimeException(mex);
+		}
 
-    }
+	}
 
-    private String getMessage(User user) {
-        return new StringBuilder("Hello ").append(user.getFirstName()).append("! ")
-                .append("To activate your account press next link: ").append(emailConfig.getDomainHost())
-                .append("/activate/").append(user.getId()).toString();
-    }
-
+	private String getMessage(User user) {
+		return new StringBuilder("Hello ").append(user.getFirstName()).append("! ")
+				.append("To activate your account press next link: ").append(emailConfig.getDomainHost())
+				.append("/activate/").append(user.getId()).toString();
+	}
 
 }

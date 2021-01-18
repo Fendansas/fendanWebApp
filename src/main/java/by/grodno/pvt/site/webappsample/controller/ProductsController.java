@@ -1,38 +1,42 @@
 package by.grodno.pvt.site.webappsample.controller;
 
+import by.grodno.pvt.site.webappsample.domain.Product;
+import by.grodno.pvt.site.webappsample.domain.User;
+import by.grodno.pvt.site.webappsample.dto.Avatar;
+import by.grodno.pvt.site.webappsample.dto.ProductDTO;
+import by.grodno.pvt.site.webappsample.dto.UserDTO;
+import by.grodno.pvt.site.webappsample.repo.ProductRepo;
+import by.grodno.pvt.site.webappsample.service.ProductService;
+import by.grodno.pvt.site.webappsample.service.StorageService;
+
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletResponse;
-
-import by.grodno.pvt.site.webappsample.service.ProductService;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.resource.HttpResource;
-
-
-
-
-import by.grodno.pvt.site.webappsample.dto.Avatar;
-import by.grodno.pvt.site.webappsample.dto.ProductDTO;
-import by.grodno.pvt.site.webappsample.service.StorageService;
-import by.grodno.pvt.site.webappsample.service.UserService;
-
 
 @Controller
 public class ProductsController {
+
+    static public final Integer SIZE = 5;
+
+    @Autowired
+    private ProductRepo productRepo;
+
     @Autowired
     private ProductService productService;
     @Autowired
@@ -41,15 +45,26 @@ public class ProductsController {
     private ConversionService convertionService;
 
     @GetMapping("/products")
-    public String getAllProducts(Model model) {
+    public String getAllProducts(@RequestParam(required = false, name = "pn") Integer pageNum,
+                                 @RequestParam(required = false, name = "sort") Sort.Direction sortDirection,
+                                 @RequestParam(required = false, name = "fieldName") String sortField, Model model) {
+        if (pageNum == null) {
+            pageNum = Integer.valueOf(0);
+        } else {
+            pageNum -= 1;
+        }
+        Page<Product> productsPage = productService.getProductPage(pageNum, SIZE, sortField, sortDirection);
 
-        List<ProductDTO> products = productService.getProducts().stream().map(u -> convertionService.convert(u, ProductDTO.class))
+        List<ProductDTO> productDTOS = productsPage.get().map(p -> convertionService.convert(p, ProductDTO.class))
                 .collect(Collectors.toList());
-
-        model.addAttribute("products", products);
-
+        model.addAttribute("products", productDTOS);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalPages", productsPage.getTotalPages());
+        model.addAttribute("fieldName", sortField);
+        model.addAttribute("sort", sortDirection);
         return "products";
     }
+
 
     @PostMapping("/products/{id}/img")
     public String handleFileUpload(@PathVariable("id") Integer id, @RequestParam("file") MultipartFile file)
@@ -69,5 +84,49 @@ public class ProductsController {
         }
     }
 
-}
+    //Удаление
+    @RequestMapping(path = "/deleteproduct/{id}")
+    public String deleteProduct(@PathVariable ("id") Integer id){
+        productRepo.deleteById(id);
+        return "redirect:/products";
+    }
 
+
+    @GetMapping("/products/edit/{id}")
+
+
+   // @PreAuthorize("@editUserVouter.checkUserId(authentication,#id)")
+    public String editProductForm(@PathVariable Integer id, Model model) {
+
+        model.addAttribute("product", productService.getProduct(id));
+
+        return "editProductView";
+    }
+
+
+
+    @PostMapping("/products/edit/{id}")
+    public String editUser(@PathVariable Integer id, @Valid ProductDTO productDTO, BindingResult br, Model model) {
+
+        if (br.hasErrors()) {
+            model.addAttribute("productDTO", productDTO);
+            return "editProductView";
+
+        }
+
+        Product product = new Product();
+        product.setId(id);
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setQuantity(productDTO.getQuantity());
+
+        productService.edit(productDTO);
+
+        return "redirect:/products";
+    }
+
+
+
+
+}

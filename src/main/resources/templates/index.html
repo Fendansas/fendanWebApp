@@ -1,26 +1,27 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title th:text="${title}"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
-<body>
-<header th:insert="blocks/header::header"></header>
+<th:block th:insert="fragments/header.html :: css" /> 
 
-<th:block th:insert="fragments/navBar.html :: navBar" />
+<body th:style="'background: url(https://storge.pic2.me/c/1360x800/134/5428273ae47d1.jpg) no-repeat center center fixed;'">
+    
+    <th:block th:insert="fragments/navBar.html :: navBar" /> 
 
-<p>
-    Hello. Choose something in menu please!
-</p>
-
-
-<br />
-<br />
+	<p>
+		Hello. Choose something in menu please!
+	</p>
 
 
-<th:block th:insert="fragments/scripts.html :: js" />
+	<br />
+	<br />
 
+
+	<th:block th:insert="fragments/scripts.html :: js" /> 
+ 
 </body>
 </html>

@@ -1,19 +1,18 @@
 package by.grodno.pvt.site.webappsample.dto;
 
+import org.hibernate.validator.constraints.Length;
 
-import by.grodno.pvt.site.webappsample.domain.Role;
 import lombok.Data;
-
-import java.math.BigDecimal;
 
 @Data
 public class UserDTO {
 
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private Role role;
-    private BigDecimal money;
+	private Integer id;
 
+	@Length(min = 3, max = 20)
+	private String firstName;
+	
+	@Length(min = 3, max = 20)
+	private String lastName;
 
 }

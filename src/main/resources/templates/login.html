@@ -1,52 +1,56 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
 <head>
-    <title th:text="${title}"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+<title>Getting Started: Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
-<body>
-<header th:insert="blocks/header::header"></header>
+<th:block th:insert="fragments/header.html :: css" />
 
 
-<div th:if="${param.error}">Invalid username and password.</div>
-<div th:if="${param.logout}">You have been logged out.</div>
+<body th:style="'background: url(https://storge.pic2.me/c/1360x800/134/5428273ae47d1.jpg) no-repeat center center fixed;'">
 
-<form method="POST"
-      th:action="@{/login}">
-    <table>
-        <tr>
-            <td>Email *</td>
-            <td><input name="email" /></td>
-        </tr>
-        <tr>
-            <td>Password *</td>
-            <td><input type="password" name="password" /></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <input type="submit" value="Login" />
-                <input type="reset"  value="Reset" />
-            </td>
-        </tr>
-    </table>
-</form>
-<!--<form th:action="@{/login}" method="post">-->
-<!--    <div>-->
-<!--        <label> User Name : <input type="text" name="email"/>-->
-<!--        </label>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label> Password: <input type="password" name="password"/>-->
-<!--        </label>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <input type="submit" value="Sign In"/>-->
-<!--    </div>-->
-<!--</form>-->
-<a th:href="@{/register}">Register new user</a>
+	<th:block th:insert="fragments/navBar.html :: navBar" />
+	<div class="container">
+		<div class="row justify-content-center p-2" th:if="${param.error}">Invalid
+			username and password.</div>
+		<div class="row justify-content-center p-2" th:if="${param.logout}">You
+			have been logged out.</div>
+		<form th:action="@{/login}" method="post">
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm p-1" style="text-align: right">User Name :</div>
+				<div class="col-sm p-1">
+					<input type="text" name="username" />
+				</div>
+			</div>
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm  p-1 justify-content-end"
+					style="text-align: right">Password:</div>
+				<div class="col-sm  p-1">
+					<input type="password" name="password" />
+				</div>
+			</div>
+			<div class="row justify-content-center  p-1">
+				<div class="col-sm  p-1" style="text-align: right" >
+				<input class="btn btn-primary" type="submit" value="Sign In" /> 
+				</div>
+				<div class="col-sm  p-1">
+				<a class="btn btn-secondary" th:href="@{/register}">Register
+					new user</a>
+					</div>
+			</div>
+		</form>
+	</div>
 
- </body>
+
+	<th:block th:insert="fragments/scripts.html :: js" />
+
+</body>
+
+
+
 </html>

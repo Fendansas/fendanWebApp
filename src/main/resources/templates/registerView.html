@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Getting Started: Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<th:block th:insert="fragments/header.html :: css" />
+
+<body>
+
+	<th:block th:insert="fragments/navBar.html :: navBar" />
+
+	<div class="row justify-content-center  p-2	">Enter user details please...</div>
+	
+	<form th:action="@{/register/new}" method="post" th:object="${userRegistrationDTO}">
+
+		<div class="row justify-content-center  p-1">
+			<div class="col-sm  p-1 justify-content-end"
+				style="text-align: right">Email :</div>
+			<div class="col-sm  p-1">
+				<input type="text" th:field="*{email}" />
+			</div>
+			
+		</div>
+		<div class="row justify-content-center alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
+
+		<div class="row justify-content-center  p-1">
+			<div class="col-sm  p-1 justify-content-end"
+				style="text-align: right">First name :</div>
+			<div class="col-sm  p-1">
+				<input type="text" th:field="*{firstName}" />
+			</div>
+		</div>
+		
+		<div class="row justify-content-center alert alert-danger" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</div>
+		
+		<div class="row justify-content-center  p-1">
+			<div class="col-sm  p-1 justify-content-end"
+				style="text-align: right">Last name :</div>
+			<div class="col-sm  p-1">
+				<input type="text"  th:field="*{lastName}" />
+			</div>
+		</div>
+		
+		<div class="row justify-content-center alert alert-danger" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</div>
+		
+		<div class="row justify-content-center  p-1">
+			<div class="col-sm  p-1 justify-content-end"
+				style="text-align: right">Password :</div>
+			<div class="col-sm  p-1">
+				<input type="password" th:field="*{password}"/>
+			</div>
+		</div>
+		
+		<div class="row justify-content-center alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</div>
+		
+		<div class="row justify-content-center  p-1">
+			<input class="btn btn-primary" type="submit" value="Register" />
+		</div>
+	</form>
+	
+
+
+
+	<th:block th:insert="fragments/scripts.html :: js" />
+</body>
+</html>

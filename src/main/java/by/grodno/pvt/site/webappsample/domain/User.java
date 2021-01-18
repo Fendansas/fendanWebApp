@@ -1,6 +1,5 @@
 package by.grodno.pvt.site.webappsample.domain;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -30,40 +29,37 @@ import lombok.NoArgsConstructor;
 @Table(name = "user_table")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 
-    private String firstName;
-    private String lastName;
+	private String firstName;
+	private String lastName;
 
-    @Email
-    @Column(nullable = false)
-    private String email;
+	@Email
+	@Column(unique = true)
+	private String email;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "u1"),
-            inverseJoinColumns = @JoinColumn(name = "u2"))
-    private List<Credentials> credentials;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+			joinColumns = @JoinColumn(name = "u1"), 
+			inverseJoinColumns = @JoinColumn(name = "u2"))
+	private List<UserCredentials> credentials;
+
+	private UserRole role;
+
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+	private UserPicture picture;
+
+//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinTable(
+//			joinColumns = @JoinColumn(name = "o1"),
+//			inverseJoinColumns = @JoinColumn(name = "o2"))
+//	private List<Order> orders;
 
 
-    private Role role;
-
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
-    private Picture picture;
-
-    private BigDecimal money;
-
-       @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "postUser")
-    private List<Post> posts;
 
 
-    @OneToOne
-    @JoinColumn(name = "users_id")
-    private Order order;
-
-    private Date birthdate;
 
 
 }

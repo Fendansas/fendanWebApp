@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<th:block th:insert="fragments/header.html :: css"/>
+
+<body>
+
+<th:block th:insert="fragments/navBar.html :: navBar"/>
+
+</div>
+
+<div class="container">
+    <!--    заголовок таблицы-->
+    <div class="row">
+        <div class="border col-lg-1">Id</div>
+        <div class="border col-lg-1">Image</div>
+        <div class="border col-lg-2">
+            <a class="p-2" th:href="@{'/products'+'?fieldName=Name'}">Name</a>
+        </div>
+        <div class="border col-lg-4">Description</div>
+        <div class="border col-lg-1">Price</div>
+        <div class="border col-lg-1">In Stock</div>
+        <div class="border col-lg-2">Add to cart</div>
+
+    </div>
+
+    <!--           Внутрянка таблицы-->
+
+    <div class="row" th:each="product : ${products}">
+
+        <div class="border col-lg-1" th:text="${product.id}"></div>
+
+        <div class="border justify-content-center col-lg-1 p-1">
+            <img th:src="@{/products/{uid}/img(uid=${product.id})}" width="75"
+                 height="75" alt="">
+        </div>
+
+        <div class="border col-lg-2" th:text="${product.name}"></div>
+        <div class="border col-lg-4" th:text="${product.description}"></div>
+        <div class="border col-lg-1" th:text="${product.price}"></div>
+        <div class="border col-lg-1" th:text="${product.quantity}"></div>
+        <div class="border col-lg-2">
+            <a class="btn btn-link"
+               th:href="@{'/shoppingCart/addProduct/{id}'(id=${product.id})}">Add to cart</a>
+
+        </div>
+    </div>
+
+
+    <!-- Старницы-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <div class="row p-2">
+                Choose page: <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+
+				<a class="p-2" th:if="${currentPage + 1 != i}"
+                   th:href="@{'/productslist'+'?pn='+${i}}">[[${i}]]</a> <span class="p-2 "
+                                                                               th:unless="${currentPage + 1 != i}">[[${i}]]</span>
+			</span>
+
+            </div>
+        </ul>
+    </nav>
+</div>
+<br/>
+<br/>
+
+
+<th:block th:insert="fragments/scripts.html :: js"/>
+
+
+
+</body>
+</html>
