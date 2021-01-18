@@ -12,22 +12,42 @@
 
 <th:block th:insert="fragments/navBar.html :: navBar" />
 
-<p class="row">You want to sell nexxt users:</p>
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+
+        <p class="row">You want to buy next products:</p>
+
+    </ul>
+</nav>
+
+
+
 
 <div class="container">
     <div class="row">
 
-        <div class="border col-lg-2">Id</div>
+        <div class="border col-lg-1">Id</div>
         <div class="border col-lg-5">Name</div>
         <div class="border col-lg-5">Price</div>
+        <div class="border col-lg-1">Delete</div>
 
     </div>
 
     <div class="row" th:each="product : ${products}">
 
-        <div class="border col-lg-2" th:text="${product.id}"></div>
+        <div class="border col-lg-1" th:text="${product.id}"></div>
         <div class="border col-lg-5" th:text="${product.Name}"></div>
         <div class="border col-lg-5" th:text="${product.price}"></div>
+
+
+
+        <div class="border col-lg-1">
+            <a class="btn btn-link"
+               th:href="@{/sold/{uid}(uid=${product.id})}">Dell</a>
+
+        </div>
 
     </div>
 
@@ -37,9 +57,9 @@
 <br />
 <br />
 
-
+<ul class="pagination justify-content-center">
 <a class="btn btn-primary" th:href="@{/sold/apply}">Perform Action</a>
-
+</ul>
 
 </body>
 </html>

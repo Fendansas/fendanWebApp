@@ -1,10 +1,8 @@
 package by.grodno.pvt.site.webappsample.controller;
 
 import by.grodno.pvt.site.webappsample.domain.Product;
-import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.dto.Avatar;
 import by.grodno.pvt.site.webappsample.dto.ProductDTO;
-import by.grodno.pvt.site.webappsample.dto.UserDTO;
 import by.grodno.pvt.site.webappsample.repo.ProductRepo;
 import by.grodno.pvt.site.webappsample.service.ProductService;
 import by.grodno.pvt.site.webappsample.service.StorageService;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,8 +36,10 @@ public class ProductsController {
 
     @Autowired
     private ProductService productService;
+
     @Autowired
     private StorageService imgService;
+
     @Autowired
     private ConversionService convertionService;
 
@@ -86,16 +85,14 @@ public class ProductsController {
 
     //Удаление
     @RequestMapping(path = "/deleteproduct/{id}")
-    public String deleteProduct(@PathVariable ("id") Integer id){
+    public String deleteProduct(@PathVariable("id") Integer id) {
         productRepo.deleteById(id);
         return "redirect:/products";
     }
 
 
     @GetMapping("/products/edit/{id}")
-
-
-   // @PreAuthorize("@editUserVouter.checkUserId(authentication,#id)")
+    // @PreAuthorize("@editUserVouter.checkUserId(authentication,#id)")
     public String editProductForm(@PathVariable Integer id, Model model) {
 
         model.addAttribute("product", productService.getProduct(id));
@@ -104,14 +101,12 @@ public class ProductsController {
     }
 
 
-
     @PostMapping("/products/edit/{id}")
     public String editUser(@PathVariable Integer id, @Valid ProductDTO productDTO, BindingResult br, Model model) {
 
         if (br.hasErrors()) {
             model.addAttribute("productDTO", productDTO);
             return "editProductView";
-
         }
 
         Product product = new Product();
@@ -125,8 +120,4 @@ public class ProductsController {
 
         return "redirect:/products";
     }
-
-
-
-
 }

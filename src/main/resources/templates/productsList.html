@@ -46,7 +46,7 @@
         <div class="border col-lg-1" th:text="${product.quantity}"></div>
         <div class="border col-lg-2">
             <a class="btn btn-link"
-               th:href="@{'/shoppingCart/addProduct/{id}'(id=${product.id})}">Add to cart</a>
+               th:href="@{/products/buy/{uid}(uid=${product.id})}">Add to cart</a>
 
         </div>
     </div>

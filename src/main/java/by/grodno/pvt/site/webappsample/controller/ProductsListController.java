@@ -1,16 +1,13 @@
 package by.grodno.pvt.site.webappsample.controller;
 
 import by.grodno.pvt.site.webappsample.domain.Product;
-import by.grodno.pvt.site.webappsample.domain.User;
+
 import by.grodno.pvt.site.webappsample.dto.Avatar;
 import by.grodno.pvt.site.webappsample.dto.ProductDTO;
-import by.grodno.pvt.site.webappsample.dto.UserDTO;
-import by.grodno.pvt.site.webappsample.exception.ProductNotFoundException;
-import by.grodno.pvt.site.webappsample.exception.UserNotFoundException;
+
 import by.grodno.pvt.site.webappsample.repo.ProductRepo;
 import by.grodno.pvt.site.webappsample.service.ProductService;
 import by.grodno.pvt.site.webappsample.service.StorageService;
-import by.grodno.pvt.site.webappsample.service.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -112,7 +109,7 @@ public class ProductsListController {
 
         if (br.hasErrors()) {
             model.addAttribute("productDTO", productDTO);
-            return "editUserView";
+            return "editProductView";
         }
 
         Product product = new Product();
@@ -120,16 +117,9 @@ public class ProductsListController {
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
         product.setDescription(productDTO.getDescription());
+        product.setQuantity(productDTO.getQuantity());
         productService.edit(productDTO);
 
         return "redirect:/productslist";
     }
-
-
-
-
-
-
-
-
 }
