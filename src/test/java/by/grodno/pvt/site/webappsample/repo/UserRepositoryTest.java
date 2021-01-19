@@ -1,4 +1,4 @@
-package by.grodno.pvt.site.webappsample.repo;//package by.grodno.pvt.site.webappsample.repo;
+//package by.grodno.pvt.site.webappsample.repo;
 //
 //import static org.junit.Assert.assertNotNull;
 //import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,9 +7,9 @@ package by.grodno.pvt.site.webappsample.repo;//package by.grodno.pvt.site.webapp
 //
 //import javax.sql.DataSource;
 //
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.extension.ExtendWith;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.autoconfigure.domain.EntityScan;
 //import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -19,61 +19,61 @@ package by.grodno.pvt.site.webappsample.repo;//package by.grodno.pvt.site.webapp
 //import org.springframework.context.annotation.Primary;
 //import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //import org.springframework.test.context.ContextConfiguration;
-//import org.springframework.test.context.junit4.SpringRunner;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
 //
 //import com.opentable.db.postgres.embedded.EmbeddedPostgres;
 //
 //import by.grodno.pvt.site.webappsample.domain.User;
 //import by.grodno.pvt.site.webappsample.repo.UserRepo;
 //
-//@RunWith(SpringRunner.class)
+//@ExtendWith(SpringExtension.class)
 //@DataJpaTest
 //@ContextConfiguration(classes = { UserRepositoryTest.EmbeddedPostgresContextConfiguration.class })
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 //public class UserRepositoryTest {
 //
-//	private static final String EMAIL = "max@max.max";
+//    private static final String EMAIL = "max@max.max";
 //
-//	@Configuration
-//	@EntityScan(basePackageClasses = User.class)
-//	@EnableJpaRepositories(basePackageClasses = UserRepo.class)
-//	public static class EmbeddedPostgresContextConfiguration {
+//    @Configuration
+//    @EntityScan(basePackageClasses = User.class)
+//    @EnableJpaRepositories(basePackageClasses = UserRepo.class)
+//    public static class EmbeddedPostgresContextConfiguration {
 //
-//		@Bean
-//		@Primary
-//		public DataSource embeddedPG() throws IOException {
-//			return EmbeddedPostgres.start().getPostgresDatabase();
-//		}
+//        @Bean
+//        @Primary
+//        public DataSource embeddedPG() throws IOException {
+//            return EmbeddedPostgres.start().getPostgresDatabase();
+//        }
 //
-//	}
+//    }
 //
-//	@Autowired
-//	private UserRepo repo;
+//    @Autowired
+//    private UserRepo repo;
 //
-//	@Test
-//	public void testRepoPresent() {
-//		assertNotNull(repo);
-//	}
+//    @Test
+//    public void testRepoPresent() {
+//        assertNotNull(repo);
+//    }
 //
-//	@Before
-//	public void setUpDB() {
-//		User user = new User();
+//    @BeforeEach
+//    public void setUpDB() {
+//        User user = new User();
 //
-//		user.setEmail(EMAIL);
-//		user.setFirstName("fName");
-//		user.setLastName("lName");
+//        user.setEmail(EMAIL);
+//        user.setFirstName("fName");
+//        user.setLastName("lName");
 //
-//		repo.save(user);
-//	}
+//        repo.save(user);
+//    }
 //
-//	@Test
-//	public void testCreate_readByUserName() {
-//		// WHEN
-//		User findByEmail = repo.findByEmail(EMAIL);
+//    @Test
+//    public void testCreate_readByUserName() {
+//        // WHEN
+//        User findByEmail = repo.findByEmail(EMAIL);
 //
-//		// THEN
-//		assertNotNull(findByEmail);
-//		assertEquals("fName", findByEmail.getFirstName());
-//	}
+//        // THEN
+//        assertNotNull(findByEmail);
+//        assertEquals("fName", findByEmail.getFirstName());
+//    }
 //
 //}

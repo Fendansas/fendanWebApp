@@ -1,0 +1,29 @@
+
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<th:block th:insert="fragments/header.html :: css" />
+
+<body th:style="'background: url(https://miro.medium.com/max/2400/1*hFwwQAW45673VGKrMPE2qQ.png) no-repeat center center fixed;'">
+
+<th:block th:insert="fragments/navBar.html :: navBar" />
+
+<!--<p>-->
+<!--    Sorry, PAGE NOT FOUND!-->
+<!--</p>-->
+
+
+<br />
+<br />
+
+
+<th:block th:insert="fragments/scripts.html :: js" />
+
+</body>
+</html>

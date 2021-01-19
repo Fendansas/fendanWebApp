@@ -1,4 +1,4 @@
-package by.grodno.pvt.site.webappsample;//package by.grodno.pvt.site.webappsample;
+//package by.grodno.pvt.site.webappsample;
 //
 //import static org.junit.Assert.assertNotNull;
 //
@@ -18,25 +18,25 @@ package by.grodno.pvt.site.webappsample;//package by.grodno.pvt.site.webappsampl
 //@AutoConfigureMockMvc
 //public class SpringBootTestApp {
 //
-//	@Autowired
-//	private UsersController controller;
+//    @Autowired
+//    private UsersController controller;
 //
-//	@Test // JUnit 5!!!
-//	public void contextLoads() {
-//		assertNotNull(controller);
-//	}
+//    @Test // JUnit 5!!!
+//    public void contextLoads() {
+//        assertNotNull(controller);
+//    }
 //
-//	@Autowired
-//	private MockMvc mvc;
+//    @Autowired
+//    private MockMvc mvc;
 //
-//	@Test
-//	public void testMockMVC() throws Exception {
+//    @Test
+//    public void testMockMVC() throws Exception {
 //
-//		mvc.perform(get("/login"))
-//			.andDo(print())
-//			.andExpect(status().isOk());
-//			//.andExpect(content().string(containsString("Sing In")));
+//        mvc.perform(get("/login"))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//                .andExpect(content().string(containsString("Sign In")));
 //
-//	}
+//    }
 //
 //}

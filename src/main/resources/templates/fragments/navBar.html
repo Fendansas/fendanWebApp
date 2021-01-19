@@ -25,6 +25,7 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/users}">User list</a>
 						<a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/products}">Product</a>
+						<a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/addProduct}">Add product</a>
 
 						<a class="dropdown-item" href="#">Another action</a>
 						<div class="dropdown-divider"></div>
