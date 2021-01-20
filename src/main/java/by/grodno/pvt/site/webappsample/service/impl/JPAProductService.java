@@ -76,22 +76,22 @@ public class JPAProductService implements ProductService, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        Product product1 = new Product(null, "AK-47", "The best of the best",null, new BigDecimal(500), 5);
+        Product product1 = new Product(null, "AK-47", "The best of the best",null, new BigDecimal(500), 5,null);
         repo.save(product1);
-        Product product2 = new Product(null, "M4", "US ARMY",null, new BigDecimal(500),5);
+        Product product2 = new Product(null, "M4", "US ARMY",null, new BigDecimal(500),5,null);
         repo.save(product2);
-        Product product3 = new Product(null, "G3", "7.62*51",null, new BigDecimal(500),5);
-        repo.save(product3);
-        Product product4 = new Product(null, "G36", "Germany",null, new BigDecimal(500),5);
-        repo.save(product4);
-        Product product5 = new Product(null, "M1911", "Colt",null, new BigDecimal(500),5);
-        repo.save(product5);
-        Product product6 = new Product(null, "PM", "RF",null, new BigDecimal(500),5);
-        repo.save(product6);
-        Product product7 = new Product(null, "G17", "Glock",null, new BigDecimal(500),5);
-        repo.save(product7);
-        Product product8 = new Product(null, "P99", "Walter",null, new BigDecimal(500),5);
-        repo.save(product8);
+//        Product product3 = new Product(null, "G3", "7.62*51",null, new BigDecimal(500),5);
+//        repo.save(product3);
+//        Product product4 = new Product(null, "G36", "Germany",null, new BigDecimal(500),5);
+//        repo.save(product4);
+//        Product product5 = new Product(null, "M1911", "Colt",null, new BigDecimal(500),5);
+//        repo.save(product5);
+//        Product product6 = new Product(null, "PM", "RF",null, new BigDecimal(500),5);
+//        repo.save(product6);
+//        Product product7 = new Product(null, "G17", "Glock",null, new BigDecimal(500),5);
+//        repo.save(product7);
+//        Product product8 = new Product(null, "P99", "Walter",null, new BigDecimal(500),5);
+//        repo.save(product8);
 
     }
 

@@ -46,7 +46,7 @@ public class User {
 
 	private UserRole role;
 
-	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private UserPicture picture;
 
 

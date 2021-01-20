@@ -2,9 +2,11 @@ package by.grodno.pvt.site.webappsample.controller;
 
 import by.grodno.pvt.site.webappsample.domain.Product;
 import by.grodno.pvt.site.webappsample.dto.Avatar;
+import by.grodno.pvt.site.webappsample.dto.AvatarP;
 import by.grodno.pvt.site.webappsample.dto.ProductDTO;
 import by.grodno.pvt.site.webappsample.repo.ProductRepo;
 import by.grodno.pvt.site.webappsample.service.ProductService;
+import by.grodno.pvt.site.webappsample.service.StorageProductService;
 import by.grodno.pvt.site.webappsample.service.StorageService;
 
 import org.apache.commons.io.IOUtils;
@@ -38,7 +40,7 @@ public class ProductsController {
     private ProductService productService;
 
     @Autowired
-    private StorageService imgService;
+    private StorageProductService imgService;
 
     @Autowired
     private ConversionService convertionService;
@@ -74,7 +76,7 @@ public class ProductsController {
 
     @GetMapping("/products/{id}/img")
     public void getImmage(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
-        Avatar file = imgService.getFile(id);
+        AvatarP file = imgService.getFile(id);
 
         if (file != null) {
             try (InputStream is = file.getData()) {

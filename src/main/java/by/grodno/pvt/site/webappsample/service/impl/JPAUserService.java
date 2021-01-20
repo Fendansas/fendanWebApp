@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import by.grodno.pvt.site.webappsample.domain.Product;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -120,6 +121,13 @@ public class JPAUserService implements UserService, InitializingBean {
 		}
 
 		return repo.findAll(pagable);
+	}
+
+	@Override
+	public void addProductToUser(List<Product> productsInUser) {
+
+		// что то что добовляет пользователя
+
 	}
 
 	@Override

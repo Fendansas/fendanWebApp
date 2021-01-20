@@ -34,6 +34,9 @@ public class Product {
     @Min(value = 0, message = "*Quantity has to be non negative number")
     private Integer quantity;
 
+    @OneToOne(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private ProductPicture picture;
+
 
 //    @OneToMany(targetEntity=ItemInOrder.class,mappedBy = "product", cascade = CascadeType.REMOVE)
 //    private List<ItemInOrder> itemInOrders;

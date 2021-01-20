@@ -14,7 +14,7 @@ public class ProductPicture {
 
 	@OneToOne
 	@JoinColumn(name = "product_id")
-	private Product user;
+	private Product product;
 
 	private String fileName;
 	private String fileLocation;

@@ -1,4 +1,4 @@
-package by.grodno.pvt.site.webappsample.service;//package by.grodno.pvt.site.webappsample.service;
+//package by.grodno.pvt.site.webappsample.service;//package by.grodno.pvt.site.webappsample.service;
 //
 //
 //import by.grodno.pvt.site.webappsample.domain.Product;

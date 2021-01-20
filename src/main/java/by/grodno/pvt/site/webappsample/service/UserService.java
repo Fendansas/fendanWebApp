@@ -3,6 +3,7 @@ package by.grodno.pvt.site.webappsample.service;
 import java.util.List;
 import java.util.Optional;
 
+import by.grodno.pvt.site.webappsample.domain.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
 
@@ -28,6 +29,8 @@ public interface UserService {
 	void activateUser(Integer id);
 
 	Page<User> getUsersPage(Integer pageNum, Integer size, String fieldName, Direction direction);
+
+	void addProductToUser (List<Product> productsInUser);
 
 	/**
 	 * Updates FirstName and LastName only.

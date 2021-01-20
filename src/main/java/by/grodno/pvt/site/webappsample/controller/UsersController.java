@@ -93,9 +93,7 @@ public class UsersController {
 	@ResponseBody
 	public List<UserDTO> getAllUsers() {
 
-//        UserNotFoundException userNotFoundException = new UserNotFoundException();
-//        userNotFoundException.setUserId("someUserId");
-//        throw userNotFoundException;
+;
 		return userService.getUsers().stream().map(u -> convertionService.convert(u, UserDTO.class))
 				.collect(Collectors.toList());
 	}
