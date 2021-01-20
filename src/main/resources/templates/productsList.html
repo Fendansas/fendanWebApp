@@ -17,15 +17,15 @@
 <div class="container">
     <!--    заголовок таблицы-->
     <div class="row">
-        <div class="border col-lg-1">Id</div>
-        <div class="border col-lg-1">Image</div>
-        <div class="border col-lg-2">
-            <a class="p-2" th:href="@{'/products'+'?fieldName=Name'}">Name</a>
+        <div style="text-align: center"; class="border col-lg-1">Id</div>
+        <div style="text-align: center"; class="border col-lg-1">Image</div>
+        <div style="text-align: center"; class="border col-lg-2">
+            <a class="p-2" th:href="@{'/productslist'+'?fieldName=Name'}">Name</a>
         </div>
-        <div class="border col-lg-4">Description</div>
-        <div class="border col-lg-1">Price</div>
-        <div class="border col-lg-1">In Stock</div>
-        <div class="border col-lg-2">Add to cart</div>
+        <div style="text-align: center"; class="border col-lg-4">Description</div>
+        <div style="text-align: center"; class="border col-lg-1">Price</div>
+        <div style="text-align: center"; class="border col-lg-1">In Stock</div>
+        <div style="text-align: center"; class="border col-lg-2">Add to cart</div>
 
     </div>
 
@@ -33,18 +33,18 @@
 
     <div class="row" th:each="product : ${products}">
 
-        <div class="border col-lg-1" th:text="${product.id}"></div>
+        <div style="text-align: center"; class="border col-lg-1" th:text="${product.id}"></div>
 
         <div class="border justify-content-center col-lg-1 p-1">
             <img th:src="@{/products/{uid}/img(uid=${product.id})}" width="75"
                  height="75" alt="">
         </div>
 
-        <div class="border col-lg-2" th:text="${product.name}"></div>
-        <div class="border col-lg-4" th:text="${product.description}"></div>
-        <div class="border col-lg-1" th:text="${product.price}"></div>
-        <div class="border col-lg-1" th:text="${product.quantity}"></div>
-        <div class="border col-lg-2">
+        <div style="text-align: center"; class="border col-lg-2" th:text="${product.name}"></div>
+        <div style="text-align: center"; class="border col-lg-4" th:text="${product.description}"></div>
+        <div style="text-align: center"; class="border col-lg-1" th:text="${product.price}"></div>
+        <div style="text-align: center"; class="border col-lg-1" th:text="${product.quantity}"></div>
+        <div style="text-align: center"; class="border col-lg-2">
             <a class="btn btn-link"
                th:href="@{/products/buy/{uid}(uid=${product.id})}">Add to cart</a>
 

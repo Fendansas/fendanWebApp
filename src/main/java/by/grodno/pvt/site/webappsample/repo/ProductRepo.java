@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface ProductRepo extends JpaRepository<Product, Integer> {
         List<Product> findByName(String name);
+
         Optional<Product> findById(Integer id);
 }

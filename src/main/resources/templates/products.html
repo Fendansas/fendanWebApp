@@ -56,15 +56,15 @@
 
         <div class="border col-lg-3" >
             <form method="POST" enctype="multipart/form-data"
-                  th:action="@{/product/{uid}/img(uid=${product.id})}">
-                <div class="custom-file">
-                    <div class="col-lg-7 p-2">
-                        <input type="file" class="custom-file-input"
-                               id="inputGroupFile03"> <label class="custom-file-label"
-                                                             for="inputGroupFile03">Choose file</label>
-                    </div>
-                    <input type="submit" value="Upload" />
+                  th:action="@{/products/{uid}/img(uid=${product.id})}">
+                <!-- <div class="custom-file">    class="custom-file-input" class="custom-file-label"--><div class="custom-file">
+                <div class="col-lg-7 p-2">
+                    <input class="custom-file-input" type="file" name="file"
+                           id="inputGroupFile04"> <label class="custom-file-label"
+                                                         for="inputGroupFile04">Choose file</label>
                 </div>
+                <input type="submit" value="Upload" />
+            </div>
             </form>
         </div>
 

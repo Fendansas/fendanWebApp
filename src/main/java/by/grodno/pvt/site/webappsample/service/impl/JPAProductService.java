@@ -120,6 +120,7 @@ public class JPAProductService implements ProductService, InitializingBean {
         findById.setName(productDTO.getName());
         findById.setDescription(productDTO.getDescription());
         findById.setPrice(productDTO.getPrice());
+        findById.setQuantity(productDTO.getQuantity());
 
         repo.save(findById);
     }

@@ -1,0 +1,110 @@
+@import "compass/css3";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: linear-gradient(-45deg, #dfbd9a, #aa7281, #102158);
+  font-family: sans-serif;
+  height: 100%;
+  width: 100%
+}
+
+header {
+  text-align: center;
+  
+  a {
+    color: inherit;
+    font-weight: bold;
+  }
+}
+
+h2, .h2 {
+  color: #fff;
+  display: inline-block;
+  font-size: 20px;
+  margin-top: 50px;
+  text: {
+    shadow: 0 1px 3px rgba(0,0,0,.5);
+  }
+}
+
+form {
+  margin: 50px auto;
+  position: relative;
+  transform-style: preserve-3d;
+  width: 538px;
+}
+
+.back-visible {
+    .front-sign-in {
+      transform:  rotateX(180deg);
+    }
+     .back-sign-up {
+        transform: rotateX(0deg);
+    } 
+}
+
+.front-sign-in, .back-sign-up {
+	background-color: rgba(245,246,247,.9);
+	backface-visibility: hidden;
+  @include box-shadow(0 0 1px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.65), inset 0 1px #fff, inset 0 0 1px #fff);
+  @include border-radius(4px);
+	height: 75px;
+  left: 0;
+  padding-top: 9px;
+  position: absolute;
+  top: 0;
+  width: inherit;
+  @include transition(transform .6s);
+}
+
+.back-sign-up {
+  transform:  rotateX(180deg);
+}
+
+input[type="text"], input[type="password"] {
+	@include border-radius(4px);
+	background-color: #f5f6f7;
+	@include box-shadow(0 1px #fff, inset 0 2px 2px rgba(0,0,0,.1));
+	border: 1px solid #b1b3b8;
+	font-size: 18px;
+  height: 57px;
+  margin-left: 12px;
+  padding-left: 12px;
+  width: 248px;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+input[type="submit"] {
+	@include border-radius(0 4px 4px 0);
+	background-color: #f60;
+  border: 0;
+	@include box-shadow(0 1px 3px rgba(0,0,0,.45));
+  color: #fff;
+  cursor: pointer;
+  font: {
+    size: 16px;
+    weight: bold;   
+  }
+  height: 52px;
+  padding: 0 12px;
+  position: absolute;
+  text: {
+    transform: uppercase;
+    shadow: 0 1px 3px rgba(0,0,0,.54);
+  }
+  z-index: -1;
+}
+
+.signin-submit {
+  right: -52px;
+}
+
+.signup-submit {
+  right: -105px;
+}

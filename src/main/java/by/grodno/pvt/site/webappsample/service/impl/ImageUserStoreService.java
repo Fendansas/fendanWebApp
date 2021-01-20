@@ -20,7 +20,7 @@ import by.grodno.pvt.site.webappsample.service.StorageService;
 import by.grodno.pvt.site.webappsample.service.UserService;
 
 @Service
-public class ImageStoreService implements StorageService {
+public class ImageUserStoreService implements StorageService {
 
 	@Autowired
 	private UserService service;
@@ -38,13 +38,15 @@ public class ImageStoreService implements StorageService {
 		if (picture == null) {
 			picture = new UserPicture();
 		}
-		picture.setFileName(file2.getAbsolutePath());
+		picture.setFileName(file2.getName());
+		picture.setFileLocation(file2.getAbsolutePath());
 
 		user.setPicture(picture);
 
 		try (InputStream in = file.getInputStream(); OutputStream out = new FileOutputStream(file2)) {
 			IOUtils.copy(in, out);
 		}
+		picture.setUser(user);
 		pictureRepo.save(picture);
 		service.saveUser(user);
 	}

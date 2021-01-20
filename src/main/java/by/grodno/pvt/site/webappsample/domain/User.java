@@ -1,13 +1,11 @@
 package by.grodno.pvt.site.webappsample.domain;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +40,7 @@ public class User {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
-			joinColumns = @JoinColumn(name = "u1"), 
+			joinColumns = @JoinColumn(name = "u1"),
 			inverseJoinColumns = @JoinColumn(name = "u2"))
 	private List<UserCredentials> credentials;
 
@@ -50,6 +48,9 @@ public class User {
 
 	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
 	private UserPicture picture;
+
+
+
 
 //	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //	@JoinTable(
