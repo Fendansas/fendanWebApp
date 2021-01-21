@@ -74,7 +74,7 @@ public class JPAUserService implements UserService, InitializingBean {
 	}
 
 	private User getUser(String email, String firstName) {
-		User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN,null);
+		User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN,null,null);
 		UserCredentials userCredentials = new UserCredentials(null, new Date(), true, "max");
 		oldUser.setCredentials(Collections.singletonList(userCredentials));
 		return oldUser;
@@ -122,14 +122,15 @@ public class JPAUserService implements UserService, InitializingBean {
 
 		return repo.findAll(pagable);
 	}
-
+///////////////////////////////////////////////////////////////////
 	@Override
 	public void addProductToUser(List<Product> productsInUser) {
+		//productsInUser.add(new Product());
 
-		// что то что добовляет пользователя
+		//repo.saveAll(productsInUser);// что то что добовляет пользователя
 
 	}
-
+////////////////////////////////////////////////////////////////////////
 	@Override
 	public void edit(UserDTO userDTO) {
 		User findById = repo.findById(userDTO.getId()).orElseThrow(() -> new UserNotFoundException());

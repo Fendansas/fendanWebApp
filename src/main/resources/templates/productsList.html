@@ -8,30 +8,30 @@
 
 <th:block th:insert="fragments/header.html :: css"/>
 
-<body>
-
+<body th:style="'background: url(https://images.wallpaperscraft.ru/image/svet_bleklyy_fon_85547_1920x1080.jpg) no-repeat center center fixed;'">
+<!--https://look.com.ua/pic/201711/1920x1200/look.com.ua-251976.jpg-->
 <th:block th:insert="fragments/navBar.html :: navBar"/>
 
 </div>
 
-<div class="container">
+<div class="container"  >
     <!--    заголовок таблицы-->
-    <div class="row">
-        <div style="text-align: center"; class="border col-lg-1">Id</div>
-        <div style="text-align: center"; class="border col-lg-1">Image</div>
+    <div class="row"  >
+        <div style="text-align: center"; class="border col-lg-1"><strong>Id</strong></div>
+        <div style="text-align: center"; class="border col-lg-1"><strong>Image</strong></div>
         <div style="text-align: center"; class="border col-lg-2">
-            <a class="p-2" th:href="@{'/productslist'+'?fieldName=Name'}">Name</a>
+            <a class="p-2" th:href="@{'/productslist'+'?fieldName=Name'}"><strong>Name</strong></a>
         </div>
-        <div style="text-align: center"; class="border col-lg-4">Description</div>
-        <div style="text-align: center"; class="border col-lg-1">Price</div>
-        <div style="text-align: center"; class="border col-lg-1">In Stock</div>
-        <div style="text-align: center"; class="border col-lg-2">Add to cart</div>
+        <div style="text-align: center"; class="border col-lg-4"><strong>Description</strong></div>
+        <div style="text-align: center"; class="border col-lg-1"><strong>Price</strong></div>
+        <div style="text-align: center"; class="border col-lg-1"><strong>In Stock</strong></div>
+        <div style="text-align: center"; class="border col-lg-2"><strong>Add to cart</strong></div>
 
     </div>
 
     <!--           Внутрянка таблицы-->
 
-    <div class="row" th:each="product : ${products}">
+    <div class="row" th:each="product : ${products}" >
 
         <div style="text-align: center"; class="border col-lg-1" th:text="${product.id}"></div>
 
@@ -51,11 +51,11 @@
         </div>
     </div>
 
-
+<!--    th:styleappend="'background-color: green'"-->
     <!-- Старницы-->
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <div class="row p-2">
+            <div class="row p-2" t>
                 Choose page: <span th:each="i: ${#numbers.sequence(1,totalPages)}">
 
 				<a class="p-2" th:if="${currentPage + 1 != i}"

@@ -76,9 +76,9 @@ public class JPAProductService implements ProductService, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        Product product1 = new Product(null, "AK-47", "The best of the best",null, new BigDecimal(500), 5,null);
+        Product product1 = new Product(null, "AK-47", "The best of the best",null, new BigDecimal(500), 5,null,null);
         repo.save(product1);
-        Product product2 = new Product(null, "M4", "US ARMY",null, new BigDecimal(500),5,null);
+        Product product2 = new Product(null, "M4", "US ARMY",null, new BigDecimal(500),5,null, null);
         repo.save(product2);
 //        Product product3 = new Product(null, "G3", "7.62*51",null, new BigDecimal(500),5);
 //        repo.save(product3);

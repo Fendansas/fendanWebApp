@@ -8,7 +8,7 @@
 
 <th:block th:insert="fragments/header.html :: css"/>
 
-<body>
+<body th:style="'background: url(https://images.wallpaperscraft.ru/image/svet_bleklyy_fon_85547_1920x1080.jpg) no-repeat center center fixed;'">
 
 <th:block th:insert="fragments/navBar.html :: navBar"/>
 
@@ -17,17 +17,17 @@
 <div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
     <!--    заголовок таблицы-->
     <div class="row">
-        <div class="border col-lg-1">Id</div>
-        <div class="border col-lg-1">Image</div>
-        <div class="border col-lg-1">
-            <a class="p-2" th:href="@{'/products'+'?fieldName=Name'}">Name</a>
+        <div style="text-align: center"; class="border col-lg-1"><strong>Id</strong></div>
+        <div style="text-align: center"; class="border col-lg-1"><strong>Image</strong></div>
+        <div style="text-align: center"; class="border col-lg-1">
+            <a class="p-2" th:href="@{'/products'+'?fieldName=Name'}"><strong>Name</strong></a>
         </div>
-        <div class="border col-lg-2">Description</div>
-        <div class="border col-lg-1">Price</div>
-        <div class="border col-lg-1">In Stock</div>
-        <div class="border col-lg-1">Edit</div>
-        <div class="border col-lg-1">Delete</div>
-        <div class="border col-lg-3" >Upload img</div>
+        <div style="text-align: center"; class="border col-lg-2"><strong>Description</strong></div>
+        <div style="text-align: center"; class="border col-lg-1"><strong>Price</strong></div>
+        <div style="text-align: center"; class="border col-lg-1"><strong>In Stock</strong></div>
+        <div style="text-align: center"; class="border col-lg-1"><strong>Edit</strong></div>
+        <div style="text-align: center"; class="border col-lg-1"><strong>Delete</strong></div>
+        <div style="text-align: center"; class="border col-lg-3" ><strong>Upload img</strong></div>
 
     </div>
 

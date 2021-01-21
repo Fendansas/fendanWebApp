@@ -27,7 +27,7 @@ public class Product {
 
     private String avatarFileName;
 
-   // @Column(nullable = false)
+    // @Column(nullable = false)
     private BigDecimal price;
 
     @Column(name = "quantity", nullable = false)
@@ -36,6 +36,13 @@ public class Product {
 
     @OneToOne(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ProductPicture picture;
+
+    //    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn
+     @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+     @JoinColumn(name = "user_id")
+     private User user;
+    //private String gun;
 
 
 //    @OneToMany(targetEntity=ItemInOrder.class,mappedBy = "product", cascade = CascadeType.REMOVE)
