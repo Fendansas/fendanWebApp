@@ -17,13 +17,13 @@
 <div class="container"  >
     <!--    заголовок таблицы-->
     <div class="row"  >
-        <div style="text-align: center"; class="border col-lg-1"><strong>Id</strong></div>
+<!--        <div style="text-align: center"; class="border col-lg-1"><strong>Id</strong></div>-->
         <div style="text-align: center"; class="border col-lg-1"><strong>Image</strong></div>
         <div style="text-align: center"; class="border col-lg-2">
             <a class="p-2" th:href="@{'/productslist'+'?fieldName=Name'}"><strong>Name</strong></a>
         </div>
         <div style="text-align: center"; class="border col-lg-4"><strong>Description</strong></div>
-        <div style="text-align: center"; class="border col-lg-1"><strong>Price</strong></div>
+        <div style="text-align: center"; class="border col-lg-2"><strong>Price</strong></div>
         <div style="text-align: center"; class="border col-lg-1"><strong>In Stock</strong></div>
         <div style="text-align: center"; class="border col-lg-2"><strong>Add to cart</strong></div>
 
@@ -33,7 +33,7 @@
 
     <div class="row" th:each="product : ${products}" >
 
-        <div style="text-align: center"; class="border col-lg-1" th:text="${product.id}"></div>
+<!--        <div style="text-align: center"; class="border col-lg-1" th:text="${product.id}"></div>-->
 
         <div class="border justify-content-center col-lg-1 p-1">
             <img th:src="@{/products/{uid}/img(uid=${product.id})}" width="75"
@@ -42,7 +42,7 @@
 
         <div style="text-align: center"; class="border col-lg-2" th:text="${product.name}"></div>
         <div style="text-align: center"; class="border col-lg-4" th:text="${product.description}"></div>
-        <div style="text-align: center"; class="border col-lg-1" th:text="${product.price}"></div>
+        <div style="text-align: center"; class="border col-lg-2" th:text="${product.price}"></div>
         <div style="text-align: center"; class="border col-lg-1" th:text="${product.quantity}"></div>
         <div style="text-align: center"; class="border col-lg-2">
             <a class="btn btn-link"

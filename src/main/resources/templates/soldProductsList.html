@@ -8,7 +8,7 @@
 
 <th:block th:insert="fragments/header.html :: css" />
 
-<body>
+<body th:style="'background: url(https://images.wallpaperscraft.ru/image/figury_forma_linii_tochki_92772_1920x1080.jpg) no-repeat center center fixed;'">
 
 <th:block th:insert="fragments/navBar.html :: navBar" />
 
@@ -17,7 +17,7 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
 
-        <p class="row">You want to buy next products:</p>
+        <p class="row"><strong>You want to buy next products: </strong></p>
 
     </ul>
 </nav>
@@ -28,10 +28,10 @@
 <div class="container">
     <div class="row">
 
-        <div class="border col-lg-1">Id</div>
-        <div class="border col-lg-5">Name</div>
-        <div class="border col-lg-5">Price</div>
-        <div class="border col-lg-1">Delete</div>
+        <div class="border col-lg-1"><strong>Id</strong></div>
+        <div class="border col-lg-5"><strong>Name</strong></div>
+        <div class="border col-lg-5"><strong>Price</strong></div>
+        <div class="border col-lg-1"><strong>Delete</strong></div>
 
     </div>
 

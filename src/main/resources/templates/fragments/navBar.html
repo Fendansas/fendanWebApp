@@ -33,10 +33,10 @@
                            th:href="@{/products}">Product</a>
                         <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/addProduct}">Add
                             product</a>
-                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/index1}">111</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/index1}">404</a>
+<!--                        <a class="dropdown-item" href="#">Another action</a>-->
+<!--                        <div class="dropdown-divider"></div>-->
+<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
                     </div>
                 </li>
                 <li class="nav-item"><a class="nav-link disabled" href="#"
@@ -44,6 +44,9 @@
 
 
             </ul>
+
+            <div  class="p-1"><a th:href="@{/?lang=ru}">RUS</a> </div>
+            <div  class="p-1"><a th:href="@{/?lang=en}">EN</a> </div>
 
 
             <div sec:authorize="!isAuthenticated()">

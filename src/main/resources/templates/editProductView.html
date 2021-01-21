@@ -9,17 +9,17 @@
 
 <th:block th:insert="fragments/header.html :: css" />
 
-<body>
+<body th:style="'background: url(https://images.wallpaperscraft.ru/image/svet_bliki_krugi_fon_bleklyy_46822_1920x1080.jpg) no-repeat center center fixed;'">
 
 <th:block th:insert="fragments/navBar.html :: navBar" />
 
-<div class="row justify-content-center  p-2	">Enter user details please...</div>
+<div class="row justify-content-center  p-2	"><strong>Enter user details please...</strong></div>
 
 <form th:action="@{/products/edit/{id}(id=${product.id})}" method="post" th:object="${product}">
 
     <div class="row justify-content-center  p-1">
         <div class="col-sm  p-1 justify-content-end"
-             style="text-align: right">Name :</div>
+             style="text-align: right"><strong>Name :</strong></div>
         <div class="col-sm  p-1">
             <input type="text" th:field="*{name}" />
         </div>
@@ -29,7 +29,7 @@
 
     <div class="row justify-content-center  p-1">
         <div class="col-sm  p-1 justify-content-end"
-             style="text-align: right">Description :</div>
+             style="text-align: right"><strong>Description :</strong></div>
         <div class="col-sm  p-1">
             <input type="text" th:field="*{description}" />
         </div>
@@ -39,7 +39,7 @@
 
     <div class="row justify-content-center  p-1">
         <div class="col-sm  p-1 justify-content-end"
-             style="text-align: right">Price :</div>
+             style="text-align: right"><strong>Price :</strong></div>
         <div class="col-sm  p-1">
             <input type="text"  th:field="*{price}" />
         </div>
@@ -49,7 +49,7 @@
 
     <div class="row justify-content-center  p-1">
         <div class="col-sm  p-1 justify-content-end"
-             style="text-align: right">Quantity :</div>
+             style="text-align: right"><strong>Quantity :</strong></div>
         <div class="col-sm  p-1">
             <input type="text"  th:field="*{quantity}" />
         </div>
