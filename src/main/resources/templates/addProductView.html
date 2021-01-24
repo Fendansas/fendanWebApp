@@ -22,13 +22,13 @@
 
 <th:block th:insert="fragments/navBar.html :: navBar" />
 
-<div class="row justify-content-center  p-2	"><strong>Enter product details please... </strong></div>
+<div class="row justify-content-center  p-2	"><strong th:text="#{editproductview.label.details}">Enter product details please... </strong></div>
 
 <form th:action="@{/addProduct/new}" method="post" th:object="${product}">
 
-    <div class="row justify-content-center  p-1">
+       <div class="row justify-content-center  p-1">
         <div class="col-sm  p-1 justify-content-end"
-             style="text-align: right"><strong> Name : </strong></div>
+             style="text-align: right"><strong th:text="#{editproductview.label.name}"> Name : </strong></div>
         <div class="col-sm  p-1">
             <input type="text" th:field="*{name}" />
         </div>
@@ -38,7 +38,7 @@
 
     <div class="row justify-content-center  p-1">
         <div class="col-sm  p-1 justify-content-end"
-             style="text-align: right"><strong>Description : </strong></div>
+             style="text-align: right"><strong th:text="#{editproductview.label.description}">Description : </strong></div>
         <div class="col-sm  p-1">
             <input type="text" th:field="*{description}" />
         </div>
@@ -48,19 +48,21 @@
 
     <div class="row justify-content-center  p-1">
         <div class="col-sm  p-1 justify-content-end"
-             style="text-align: right"><strong>Price :</strong></div>
+             style="text-align: right"><strong th:text="#{editproductview.label.price}">Price :</strong></div>
         <div class="col-sm  p-1">
             <input type="text"  th:field="*{price}" />
         </div>
     </div>
 
-<!--    <div class="row justify-content-center alert alert-danger" role="alert" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Name price</div>-->
+    <div class="row justify-content-center alert alert-danger" role="alert" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Name price</div>
 
     <div class="row justify-content-center  p-1">
         <div class="col-sm  p-1 justify-content-end"
-             style="text-align: right"><strong>Quantity :</strong></div>
+             style="text-align: right"><strong th:text="#{editproductview.label.quantity}">Quantity :</strong></div>
         <div class="col-sm  p-1">
             <input type="text" th:field="*{quantity}"/>
+            <td th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Name
+                Error</td>
         </div>
     </div>
 

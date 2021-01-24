@@ -30,7 +30,7 @@ public interface UserService {
 
 	Page<User> getUsersPage(Integer pageNum, Integer size, String fieldName, Direction direction);
 
-	void addProductToUser (List<Product> productsInUser);
+	void addProductToUser (List<Product> products);
 
 	/**
 	 * Updates FirstName and LastName only.

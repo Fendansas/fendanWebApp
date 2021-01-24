@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
@@ -9,17 +8,20 @@
 
 <th:block th:insert="fragments/header.html :: css" />
 
-<body th:style="'background: url(https://images.wallpaperscraft.ru/image/svet_bliki_krugi_fon_bleklyy_46822_1920x1080.jpg) no-repeat center center fixed;'">
+<body>
 
 <th:block th:insert="fragments/navBar.html :: navBar" />
 
+<p>
+    Sorry, user <th:block th:text="${userId}"></th:block>
+</p>
 
-<div class="row justify-content-center  p-2	">
-    <p>
-        <strong th:text="#{sold.label.operation}">Operation is performed</strong>
-    </p>
-</div>
 
+<br />
+<br />
+
+
+<th:block th:insert="fragments/scripts.html :: js" />
 
 </body>
 </html>

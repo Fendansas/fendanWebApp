@@ -25,13 +25,6 @@ public class AddProduct {
     @Autowired
     private ConversionService convertionService;
 
-//    @GetMapping("/activate/{id}")
-//    String activation(@PathVariable Integer id) {
-//
-//        service.activateUser(id);
-//
-//        return "redirect:/login";
-//    }
 
     @GetMapping("/addProduct")
     String getForm(ProductDTO productDTO, Model model) {
@@ -47,7 +40,8 @@ public class AddProduct {
 
         if (br.hasErrors()) {
             model.addAttribute("productDTO", productDTO);
-            return "editProductView";
+            System.out.println("Не коректные введеные данные");
+            return "redirect:/addProduct";
         }
 
 

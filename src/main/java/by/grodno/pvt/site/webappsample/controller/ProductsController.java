@@ -104,11 +104,11 @@ public class ProductsController {
 
 
     @PostMapping("/products/edit/{id}")
-    public String editUser(@PathVariable Integer id, @Valid ProductDTO productDTO, BindingResult br, Model model) {
+    public String editProduct(@PathVariable Integer id, @Valid ProductDTO productDTO, BindingResult br, Model model) {
 
         if (br.hasErrors()) {
             model.addAttribute("productDTO", productDTO);
-            return "editProductView";
+            return "redirect:/products/edit/{id} ";
         }
 
         Product product = new Product();

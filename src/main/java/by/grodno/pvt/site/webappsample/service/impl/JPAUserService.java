@@ -124,10 +124,11 @@ public class JPAUserService implements UserService, InitializingBean {
 	}
 ///////////////////////////////////////////////////////////////////
 	@Override
-	public void addProductToUser(List<Product> productsInUser) {
-		//productsInUser.add(new Product());
-
-		//repo.saveAll(productsInUser);// что то что добовляет пользователя
+	public void addProductToUser(List<Product> products) {
+//		Product product = new Product();
+//		products.add(new Product());
+//
+//	repo.save();
 
 	}
 ////////////////////////////////////////////////////////////////////////

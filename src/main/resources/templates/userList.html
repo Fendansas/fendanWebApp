@@ -21,15 +21,15 @@
 
 <div class="container">
 	<div class="row">
-		<div style="text-align: center"; class="border col-lg-1"> <strong>Image</strong> </div>
-		<div style="text-align: center"; class="border col-lg-1"><strong> Id</strong></div>
+		<div style="text-align: center"; class="border col-lg-1" th:text="#{userList.label.image}">><strong>Image</strong> </div>
+		<div style="text-align: center"; class="border col-lg-1" ><strong> Id</strong></div>
 		<div style="text-align: center"; class="border col-lg-2">
-			<a class="p-2" th:href="@{'/users'+'?fieldName=firstName'}"><strong>Firstname</strong></a>
+			<a class="p-2" th:href="@{'/users'+'?fieldName=firstName'}" th:text="#{userList.label.firstname}"><strong>Firstname</strong></a>
 		</div>
-		<div style="text-align: center"; class="border col-lg-2"><strong>Lastname</strong></div>
-		<div style="text-align: center"; class="border col-lg-1"><strong>Edit</strong></div>
-		<div style="text-align: center"; class="border col-lg-1"><strong>Delete</strong></div>
-		<div style="text-align: center"; class="border col-lg-4"><strong>Upload img </strong></div>
+		<div style="text-align: center"; class="border col-lg-2" th:text="#{userList.label.lastname}" ><strong>Lastname</strong></div>
+		<div style="text-align: center"; class="border col-lg-1" th:text="#{userList.label.edit}"><strong>Edit</strong></div>
+		<div style="text-align: center"; class="border col-lg-1" th:text="#{userList.label.delete}"><strong>Delete</strong></div>
+		<div style="text-align: center"; class="border col-lg-4" th:text="#{userList.label.uploadimg}"><strong>Upload img </strong></div>
 	</div>
 
 	<div class="row" th:each="user : ${users}">
@@ -43,11 +43,11 @@
 
 		<div style="text-align: center"; class="border col-lg-1">
 			<a class="btn btn-link"
-			   th:href="@{/users/edit/{uid}(uid=${user.id})}">Edit</a>
+			   th:href="@{/users/edit/{uid}(uid=${user.id})}" >Edit</a>
 		</div>
 <!--	Del	 Its works -->
 		<div style="text-align: center"; class="border col-lg-1">
-		<a class="btn btn-link" th:href="@{'/deleteUser/'+${user.id}}">Delete</a>
+		<a class="btn btn-link" th:href="@{'/deleteUser/'+${user.id} }"  >Delete</a>
 		</div>
 <!--	th:href="@{/delete/{id}(id=${user.id})}"	-->
 		<div class="border col-lg-4">
@@ -57,9 +57,9 @@
 				<div class="col-lg-7 p-2">
 					<input class="custom-file-input" type="file" name="file"
 						   id="inputGroupFile03"> <label class="custom-file-label"
-														 for="inputGroupFile03">Choose file</label>
+														 for="inputGroupFile03" >Choose file</label>
 				</div>
-				<input type="submit" value="Upload" />
+				<input type="submit"  value="Upload" />
 			</div>
 			</form>
 		</div>
@@ -69,7 +69,7 @@
 	<ul class="pagination justify-content-center">
 	<div class="row p-2">
 
-		Choose page: <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+        <a th:text="#{userList.label.choosepage}">Choose page:</a> <span th:each="i: ${#numbers.sequence(1,totalPages)}">
 
 				<a class="p-2" th:if="${currentPage + 1 != i}"
 				   th:href="@{'/users'+'?pn='+${i}}">[[${i}]]</a> <span class="p-2 "

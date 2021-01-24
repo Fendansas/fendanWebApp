@@ -55,7 +55,7 @@ public class EmailServiceImpl implements EmailService {
 			message.setFrom(new InternetAddress(from));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-			message.setSubject("Activation link for Students.com");
+			message.setSubject("Activation link for Store.com");
 
 			MimeBodyPart mimeBodyPart = new MimeBodyPart();
 			mimeBodyPart.setContent(getMessage(user), "text/html");

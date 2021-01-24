@@ -74,16 +74,17 @@ public class ProductSellingController {
     @GetMapping("/sold/apply")
     public String soldApply(Model model, HttpSession session) {
 
-//        List<ProductDTO> attribute = getSoldProducts(session);
+      List<ProductDTO> attribute = getSoldProducts(session);
         List<Product> products = new ArrayList<>();
+
 //
-//        for (ProductDTO customer : attribute){
-//            Product product = productDTOToDomainConverter.convert(customer);
-//            products.add(product);
+        for (ProductDTO customer : attribute){
+            Product product = productDTOToDomainConverter.convert(customer);
+
+            userService.addProductToUser(products);
+        }
 //
-//        }
-//
-        userService.addProductToUser(products); // сделать метод добавляющий продукты в список пользователя
+        //userService.addProductToUser(products); // сделать метод добавляющий продукты в список пользователя
 //
 //
 //

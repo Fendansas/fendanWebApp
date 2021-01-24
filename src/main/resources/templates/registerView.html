@@ -13,13 +13,13 @@
 
 	<th:block th:insert="fragments/navBar.html :: navBar" />
 
-	<div class="row justify-content-center  p-2	"><strong>Enter user details please...</strong></div>
+	<div class="row justify-content-center  p-2	"><strong th:text="#{sold.label.details}">Enter user details please...</strong></div>
 	
 	<form th:action="@{/register/new}" method="post" th:object="${userRegistrationDTO}">
 
 		<div class="row justify-content-center  p-1">
 			<div class="col-sm  p-1 justify-content-end"
-				style="text-align: right"><strong>Email :</strong></div>
+				style="text-align: right"><strong th:text="#{sold.label.email}">Email :</strong></div>
 			<div class="col-sm  p-1">
 				<input type="text" th:field="*{email}" />
 			</div>
@@ -29,7 +29,7 @@
 
 		<div class="row justify-content-center  p-1">
 			<div class="col-sm  p-1 justify-content-end"
-				style="text-align: right"><strong>First name :</strong></div>
+				style="text-align: right"><strong th:text="#{sold.label.firesname}">First name :</strong></div>
 			<div class="col-sm  p-1">
 				<input type="text" th:field="*{firstName}" />
 			</div>
@@ -39,7 +39,7 @@
 		
 		<div class="row justify-content-center  p-1">
 			<div class="col-sm  p-1 justify-content-end"
-				style="text-align: right"><strong>Last name :</strong></div>
+				style="text-align: right"><strong th:text="#{sold.label.lastname}">Last name :</strong></div>
 			<div class="col-sm  p-1">
 				<input type="text"  th:field="*{lastName}" />
 			</div>
@@ -49,7 +49,7 @@
 		
 		<div class="row justify-content-center  p-1">
 			<div class="col-sm  p-1 justify-content-end"
-				style="text-align: right"><strong>Password :</strong></div>
+				style="text-align: right"><strong th:text="#{sold.label.password}">Password :</strong></div>
 			<div class="col-sm  p-1">
 				<input type="password" th:field="*{password}"/>
 			</div>

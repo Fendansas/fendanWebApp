@@ -17,17 +17,17 @@
 <div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
     <!--    заголовок таблицы-->
     <div class="row">
-        <div style="text-align: center" ; class="border col-lg-1"><strong>Id</strong></div>
-        <div style="text-align: center" ; class="border col-lg-1"><strong>Image</strong></div>
+        <div style="text-align: center" ; class="border col-lg-1"><strong th:text="#{products.label.id}">Id</strong></div>
+        <div style="text-align: center" ; class="border col-lg-1"><strong th:text="#{products.label.image}">Image</strong></div>
         <div style="text-align: center" ; class="border col-lg-1">
-            <a class="p-2" th:href="@{'/products'+'?fieldName=Name'}"><strong>Name</strong></a>
+            <a class="p-2" th:href="@{'/products'+'?fieldName=Name'}"><strong th:text="#{productslist.label.name}">Name</strong></a>
         </div>
-        <div style="text-align: center" ; class="border col-lg-2"><strong>Description</strong></div>
-        <div style="text-align: center" ; class="border col-lg-1"><strong>Price</strong></div>
-        <div style="text-align: center" ; class="border col-lg-1"><strong>In Stock</strong></div>
-        <div style="text-align: center" ; class="border col-lg-1"><strong>Edit</strong></div>
-        <div style="text-align: center" ; class="border col-lg-1"><strong>Delete</strong></div>
-        <div style="text-align: center" ; class="border col-lg-3"><strong>Upload img</strong></div>
+        <div style="text-align: center" ; class="border col-lg-2"><strong th:text="#{products.label.description}">Description</strong></div>
+        <div style="text-align: center" ; class="border col-lg-1"><strong th:text="#{products.label.Price}">Price</strong></div>
+        <div style="text-align: center" ; class="border col-lg-1"><strong th:text="#{products.label.instock}">In Stock</strong></div>
+        <div style="text-align: center" ; class="border col-lg-1"><strong th:text="#{products.label.edit}">Edit</strong></div>
+        <div style="text-align: center" ; class="border col-lg-1"><strong th:text="#{products.label.delete}">Delete</strong></div>
+        <div style="text-align: center" ; class="border col-lg-3"><strong th:text="#{products.label.uloadimg}">Upload img</strong></div>
 
     </div>
 
@@ -46,13 +46,13 @@
         <div class="border col-lg-2" th:text="${product.description}"></div>
         <div class="border col-lg-1" th:text="${product.price}"></div>
         <div class="border col-lg-1" th:text="${product.quantity}"></div>
-        <div class="border col-lg-1">
-            <a class="btn btn-link"
-               th:href="@{/products/edit/{uid}(uid=${product.id})}">Edit</a>
-        </div>
+
+            <a class="border col-lg-1"
+               th:href="@{/products/edit/{uid}(uid=${product.id})}" th:text="#{products.label.edit}">Edit</a>
+
 
         <!--        <a class="border col-lg-1" th:href="@{'/deleteproduct/'+${product.id}}"> del</a>-->
-        <a class="border col-lg-1" th:href="@{'/deleteproduct/'+${product.id}}"> del</a>
+        <a class="border col-lg-1" th:href="@{'/deleteproduct/'+${product.id}}" th:text="#{products.label.delete}">Delete</a>
 
 
         <div class="border col-lg-3">

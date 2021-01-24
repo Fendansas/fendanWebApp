@@ -14,6 +14,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <hiber.version>5.4.23.Final</hiber.version>
         <hiber-validator.version>6.1.6.Final</hiber-validator.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->

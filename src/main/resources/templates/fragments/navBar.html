@@ -18,21 +18,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a class="nav-link" href="/">Home
+                <li class="nav-item active"><a class="nav-link" href="/" th:text="#{navbar.label.home}">Home
                     <span class="sr-only">(current)</span>
                 </a></li>
-                <li class="nav-item"><a class="nav-link" href="/productslist">Products</a></li>
-                <li class="nav-item"><a class="nav-link" href="/sold">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="/productslist" th:text="#{navbar.label.products}">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="/sold" th:text="#{navbar.label.cart}">Cart</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                         role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"> Dropdown </a>
+                        aria-expanded="false" th:text="#{navbar.label.chose}">Choose </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/users}">User list</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/users}" th:text="#{navbar.label.userlist}">User list</a>
                         <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item"
-                           th:href="@{/products}">Product</a>
-                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/addProduct}">Add
-                            product</a>
+                           th:href="@{/products}" th:text="#{navbar.label.product}">Product</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/addProduct}" th:text="#{navbar.label.addproduct}">Add product</a>
                         <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/index1}">404</a>
 <!--                        <a class="dropdown-item" href="#">Another action</a>-->
 <!--                        <div class="dropdown-divider"></div>-->

@@ -17,7 +17,7 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
 
-        <p class="row"><strong>You want to buy next products: </strong></p>
+        <p class="row" th:text="#{soldpoductslist.label.youwont}"><strong>You want to buy next products: </strong></p>
 
     </ul>
 </nav>
@@ -28,10 +28,10 @@
 <div class="container">
     <div class="row">
 
-        <div class="border col-lg-1"><strong>Id</strong></div>
-        <div class="border col-lg-5"><strong>Name</strong></div>
-        <div class="border col-lg-5"><strong>Price</strong></div>
-        <div class="border col-lg-1"><strong>Delete</strong></div>
+        <div class="border col-lg-1" ><strong th:text="#{soldpoductslist.label.id}">Id</strong></div>
+        <div class="border col-lg-5" ><strong th:text="#{soldpoductslist.label.name}">Name</strong></div>
+        <div class="border col-lg-5" ><strong th:text="#{soldpoductslist.label.price}">Price</strong></div>
+        <div class="border col-lg-1"><strong th:text="#{soldpoductslist.label.delete}">Delete</strong></div>
 
     </div>
 
@@ -54,7 +54,7 @@
 </div>
 
 
-    <h2 class="col-md-11" th:inline="text">Total:  </h2>
+    <h2 class="col-md-11" th:inline="text" th:text="#{soldpoductslist.label.total}" >Total:  </h2>
 <div class="col-md-11" th:text="${totalPrice}"></div>
 
 </a>
@@ -65,7 +65,7 @@
 <br />
 
 <ul class="pagination justify-content-center">
-<a class="btn btn-primary" th:href="@{/sold/apply}">Perform Action</a>
+<a class="btn btn-primary" th:href="@{/sold/apply}" th:text="#{soldpoductslist.label.perform}">Perform Action</a>
 </ul>
 
 </body>

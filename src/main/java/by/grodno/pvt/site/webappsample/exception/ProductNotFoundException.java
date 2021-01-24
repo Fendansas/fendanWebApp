@@ -4,11 +4,11 @@ public class ProductNotFoundException extends RuntimeException {
 
     private String productId;
 
-    public String getUserId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setUserId(String userId) {
-        this.productId = userId;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 }
