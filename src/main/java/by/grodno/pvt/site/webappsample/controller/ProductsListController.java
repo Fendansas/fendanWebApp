@@ -95,13 +95,13 @@ public class ProductsListController {
 
 
     // Изминения
-    @GetMapping("/productslist/edit/{id}")
-    @PreAuthorize("@editUserVouter.checkUserId(authentication,#id)")
-    public String editProductForm(@PathVariable Integer id, Model model) {
+        @GetMapping("/productslist/edit/{id}")
+        @PreAuthorize("@editUserVouter.checkUserId(authentication,#id)")
+        public String editProductForm(@PathVariable Integer id, Model model) {
 
-        model.addAttribute("product", productService.getProduct(id));
+            model.addAttribute("product", productService.getProduct(id));
 
-        return "editProductForm";
+            return "editProductForm";
     }
 
     @PostMapping("/productslist/edit/{id}")

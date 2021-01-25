@@ -5,4 +5,6 @@ import by.grodno.pvt.site.webappsample.domain.ProductPicture;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductPictureRepo extends JpaRepository<ProductPicture, Integer> {
+
+
 }

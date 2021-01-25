@@ -26,7 +26,7 @@
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                         role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" th:text="#{navbar.label.chose}">Choose </a>
+                        aria-expanded="false" th:text="#{navbar.label.chose}">Administration</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/users}" th:text="#{navbar.label.userlist}">User list</a>
                         <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item"

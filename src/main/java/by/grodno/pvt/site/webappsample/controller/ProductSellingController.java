@@ -2,6 +2,7 @@ package by.grodno.pvt.site.webappsample.controller;//package by.grodno.pvt.site.
 
 import by.grodno.pvt.site.webappsample.converter.ProductDTOToDomainConverter;
 import by.grodno.pvt.site.webappsample.domain.Product;
+import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.dto.ProductDTO;
 import by.grodno.pvt.site.webappsample.service.ProductService;
 
@@ -72,30 +73,47 @@ public class ProductSellingController {
     }
 
     @GetMapping("/sold/apply")
-    public String soldApply(Model model, HttpSession session) {
+    public String soldApply(@PathVariable Integer id, Model model, HttpSession session) {
 
-      List<ProductDTO> attribute = getSoldProducts(session);
-        List<Product> products = new ArrayList<>();
+        List<ProductDTO> attribute = getSoldProducts(session);
 
+
+        //////////////////////////////////////////////////////
+        for (ProductDTO customer : attribute) {
+            Product product = productService.getProduct(customer.getId());//получаю id по id иду в базу
+            if(product.getQuantity()>0){
+                product.setQuantity(product.getQuantity()-1); // проверяю если остаток не 0 // -1 продук
+
+                userService.addProductToUser(product); //добавляю продук в пользователя
+
+                productService.saveProduct(product); //сохраняю продукт
+
+                User user = userService.getUser(id);
+
+                userService.saveUser(user);  //сохраняю пользователя
+
+            }
+
+        ///////////////////////////////////////////
+//        List<Product> products = new ArrayList<>();
+//        for (ProductDTO customer : attribute){
+//            Product product = productDTOToDomainConverter.convert(customer);
 //
-        for (ProductDTO customer : attribute){
-            Product product = productDTOToDomainConverter.convert(customer);
-
-            userService.addProductToUser(products);
-        }
-//
+//            //userService.addProductToUser(products);
+       }
         //userService.addProductToUser(products); // сделать метод добавляющий продукты в список пользователя
-//
-//
-//
-        session.setAttribute("soldProducts", new ArrayList<Product>());
-//
+//        session.setAttribute("soldProducts", new ArrayList<Product>());
         return "sold";
     }
+
+
+
+
+
 // Удаление из карзины
 
     @GetMapping("/sold/{id}")
-    public String soldDelete ( @PathVariable Integer id,Model model, HttpSession session) {
+    public String soldDelete (@PathVariable Integer id,Model model, HttpSession session) {
 
         List<ProductDTO> attribute = getSoldProducts(session);
         //ProductDTO productDTO = new ProductDTO();

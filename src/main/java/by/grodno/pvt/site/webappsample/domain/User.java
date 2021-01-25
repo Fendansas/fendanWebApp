@@ -51,8 +51,8 @@ public class User {
 	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private UserPicture picture;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Fetch(value = FetchMode.SUBSELECT) // стратегия загрузки, без нее не работает
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@Fetch(value = FetchMode.SUBSELECT) // стратегия загрузки, без нее не работает
 	private List<Product> products;
 
 
