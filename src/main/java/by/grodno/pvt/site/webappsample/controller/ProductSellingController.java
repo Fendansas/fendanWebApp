@@ -72,10 +72,12 @@ public class ProductSellingController {
         return "soldProductsList";
     }
 
-    @GetMapping("/sold/apply")
-    public String soldApply(@PathVariable Integer id, Model model, HttpSession session) {
+    @GetMapping("/sold/apply{user}")
+    public String soldApply(@PathVariable User user, Model model, HttpSession session) {
 
         List<ProductDTO> attribute = getSoldProducts(session);
+         Integer id =user.getId();
+        System.out.println(id);
 
 
         //////////////////////////////////////////////////////
@@ -84,13 +86,13 @@ public class ProductSellingController {
             if(product.getQuantity()>0){
                 product.setQuantity(product.getQuantity()-1); // проверяю если остаток не 0 // -1 продук
 
-                userService.addProductToUser(product); //добавляю продук в пользователя
-
-                productService.saveProduct(product); //сохраняю продукт
-
-                User user = userService.getUser(id);
-
-                userService.saveUser(user);  //сохраняю пользователя
+//                userService.addProductToUser(product); //добавляю продук в пользователя
+//
+//                productService.saveProduct(product); //сохраняю продукт
+//
+//               // User user = userService.getUser(id);
+//
+//                userService.saveUser(user);  //сохраняю пользователя
 
             }
 
