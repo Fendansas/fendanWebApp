@@ -19,6 +19,7 @@ import by.grodno.pvt.site.webappsample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +44,7 @@ public class ProductSellingController {
     @Autowired
     private ProductDTOToDomainConverter productDTOToDomainConverter;
 
-// Добавление в карзину продуктов
+    // Добавление в карзину продуктов
     @GetMapping("/products/buy/{id}")
     public String editProductForm(@PathVariable Integer id, HttpSession session) {
         List<ProductDTO> attribute = getSoldProducts(session);
@@ -56,7 +57,8 @@ public class ProductSellingController {
 
         return "redirect:/productslist";
     }
-//уточнить как этоработает
+
+    //уточнить как этоработает
     private List<ProductDTO> getSoldProducts(HttpSession session) {
         return (List<ProductDTO>) session.getAttribute("soldProducts");
     }
@@ -79,59 +81,52 @@ public class ProductSellingController {
     @GetMapping("/sold/apply{user}")
     public String soldApply(@PathVariable User user, Model model, HttpSession session, Principal principal) {
         //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Integer integer;
-        String name = principal.getName();
-         Optional<User> user1 = userService.findByEmail(principal.getName()) ;
-        String nn = user1.toString();
-        System.out.println(nn);
-
+        //Integer integer;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        System.out.println(username);
         List<ProductDTO> attribute = getSoldProducts(session);
-        // Integer id =user.getId();
-        //System.out.println(id);
 
+        Optional<User> optionalUser = userService.findByEmail(username);
+        User user1 = optionalUser.isPresent() ? optionalUser.get() : new User();
+
+        List<Product> test = new ArrayList<>();
 
         //////////////////////////////////////////////////////
         for (ProductDTO customer : attribute) {
             Product product = productService.getProduct(customer.getId());//получаю id по id иду в базу
-            if(product.getQuantity()>0){
-                product.setQuantity(product.getQuantity()-1); // проверяю если остаток не 0 // -1 продук
-
-//                userService.addProductToUser(product); //добавляю продук в пользователя
+            if (product.getQuantity() > 0) {
+                product.setQuantity(product.getQuantity() - 1); // проверяю если остаток не 0 // -1 продук
+                test.add(product);
+                //добавляю продук в пользователя
 //
                 productService.saveProduct(product); //сохраняю продукт
 //
-//               // User user = userService.getUser(id);
+                 //User user = userService.getUser(id);
 //
 //                userService.saveUser(user);  //сохраняю пользователя
 
             }
 
-        ///////////////////////////////////////////
-//        List<Product> products = new ArrayList<>();
-//        for (ProductDTO customer : attribute){
-//            Product product = productDTOToDomainConverter.convert(customer);
-//
-//            //userService.addProductToUser(products);
-       }
+
+        }
+        userService.addProductToUser(test,user1);
         //userService.addProductToUser(products); // сделать метод добавляющий продукты в список пользователя
         session.setAttribute("soldProducts", new ArrayList<Product>());
         return "sold";
     }
 
 
-
-
-
 // Удаление из карзины
 
     @GetMapping("/sold/{id}")
-    public String soldDelete (@PathVariable Integer id,Model model, HttpSession session) {
+    public String soldDelete(@PathVariable Integer id, Model model, HttpSession session) {
 
         List<ProductDTO> attribute = getSoldProducts(session);
         //ProductDTO productDTO = new ProductDTO();
 
         for (ProductDTO customer : attribute) {
-            if (customer.getId().equals(id)){
+            if (customer.getId().equals(id)) {
                 attribute.remove(customer);
                 return "redirect:/sold";
             }
@@ -151,8 +146,6 @@ public class ProductSellingController {
 //        }
 //        return "totalprice";
 //    }
-
-
 
 
 }
