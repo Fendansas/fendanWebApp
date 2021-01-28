@@ -6,9 +6,12 @@ import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.dto.ProductDTO;
 import by.grodno.pvt.site.webappsample.service.ProductService;
 
+import java.io.PrintStream;
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +19,7 @@ import by.grodno.pvt.site.webappsample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -73,11 +77,17 @@ public class ProductSellingController {
     }
 
     @GetMapping("/sold/apply{user}")
-    public String soldApply(@PathVariable User user, Model model, HttpSession session) {
+    public String soldApply(@PathVariable User user, Model model, HttpSession session, Principal principal) {
+        //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Integer integer;
+        String name = principal.getName();
+         Optional<User> user1 = userService.findByEmail(principal.getName()) ;
+        String nn = user1.toString();
+        System.out.println(nn);
 
         List<ProductDTO> attribute = getSoldProducts(session);
-         Integer id =user.getId();
-        System.out.println(id);
+        // Integer id =user.getId();
+        //System.out.println(id);
 
 
         //////////////////////////////////////////////////////
@@ -88,7 +98,7 @@ public class ProductSellingController {
 
 //                userService.addProductToUser(product); //добавляю продук в пользователя
 //
-//                productService.saveProduct(product); //сохраняю продукт
+                productService.saveProduct(product); //сохраняю продукт
 //
 //               // User user = userService.getUser(id);
 //
@@ -104,7 +114,7 @@ public class ProductSellingController {
 //            //userService.addProductToUser(products);
        }
         //userService.addProductToUser(products); // сделать метод добавляющий продукты в список пользователя
-//        session.setAttribute("soldProducts", new ArrayList<Product>());
+        session.setAttribute("soldProducts", new ArrayList<Product>());
         return "sold";
     }
 
