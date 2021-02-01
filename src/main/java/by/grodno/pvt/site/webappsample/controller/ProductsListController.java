@@ -84,11 +84,6 @@ public class ProductsListController {
     @GetMapping("/apis/v1/productslist")
     @ResponseBody
     public List<ProductDTO> getAllPoducts() {
-
-
-//        ProductNotFoundException productNotFoundException = new ProductNotFoundException();
-//        productNotFoundException.setUserId("someProductId");
-//        throw productNotFoundException;
         return productService.getProducts().stream().map(u -> convertionService.convert(u, ProductDTO.class))
                 .collect(Collectors.toList());
     }
@@ -122,4 +117,15 @@ public class ProductsListController {
 
         return "redirect:/productslist";
     }
+//Details
+    @GetMapping("/productslist/edit/{id}")
+    @PreAuthorize("@editUserVouter.checkUserId(authentication,#id)")
+    public String details(@PathVariable Integer id, Model model) {
+
+        model.addAttribute("product", productService.getProduct(id));
+
+        return "editProductForm";}
+
+
+   // details
 }

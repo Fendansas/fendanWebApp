@@ -58,7 +58,7 @@ public class ProductSellingController {
         return "redirect:/productslist";
     }
 
-    //уточнить как этоработает
+
     private List<ProductDTO> getSoldProducts(HttpSession session) {
         return (List<ProductDTO>) session.getAttribute("soldProducts");
     }
@@ -68,15 +68,6 @@ public class ProductSellingController {
     public String sold(Model model, HttpSession session) {
 
         List<ProductDTO> soldProducts = getSoldProducts(session);
-
-//        BigDecimal totalPrice = null;
-//        for (ProductDTO productDTO : soldProducts) {
-//            BigDecimal x = productDTO.getPrice();
-//            totalPrice.add(x);
-//
-//        }
- //       System.out.println(totalPrice);
-       // model.addAttribute
 
         if (soldProducts == null) {
             session.setAttribute("soldProducts", new ArrayList<ProductDTO>());
@@ -102,7 +93,6 @@ public class ProductSellingController {
 
        // BigDecimal g; g.add(new BigDecimal(12));
 
-        //////////////////////////////////////////////////////
         for (ProductDTO productDTO : soldProducts) {
             Product product = productService.getProduct(productDTO.getId());//получаю id по id иду в базу
             if (product.getQuantity() > 0) {
@@ -112,7 +102,7 @@ public class ProductSellingController {
             }
         }
         userService.addProductToUser(products,user1);
-        //userService.addProductToUser(products); // сделать метод добавляющий продукты в список пользователя
+
         session.setAttribute("soldProducts", new ArrayList<Product>());
         return "sold";
     }
@@ -124,29 +114,35 @@ public class ProductSellingController {
     public String soldDelete(@PathVariable Integer id, Model model, HttpSession session) {
 
         List<ProductDTO> attribute = getSoldProducts(session);
-        //ProductDTO productDTO = new ProductDTO();
 
-        for (ProductDTO customer : attribute) {
-            if (customer.getId().equals(id)) {
-                attribute.remove(customer);
+
+        for (ProductDTO productDTO : attribute) {
+            if (productDTO .getId().equals(id)) {
+                attribute.remove(productDTO );
                 return "redirect:/sold";
             }
         }
         return "redirect:/sold";
     }
 
-//    @GetMapping("/sold")
-//    public String totalPrice ( @PathVariable Integer id,Model model, HttpSession session) {
-//
-//        List<ProductDTO> attribute = getSoldProducts(session);
-//        //ProductDTO productDTO = new ProductDTO();
-//        BigDecimal totalprice = null;
-//
-//        for (ProductDTO customer : attribute) {
-//           totalprice.add(customer.getPrice());
-//        }
-//        return "totalprice";
-//    }
+
+    // список продуктов в карзине
+    @GetMapping("/userProducts")
+    public String userProducts(Model model, HttpSession session) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        Optional<User> optionalUser = userService.findByEmail(username);
+        User user = optionalUser.isPresent() ? optionalUser.get() : new User();
+
+        List<Product> products = user.getProducts();
+        model.addAttribute("products", products);
+        return "userProducts";
+    }
+
+
+
 
 
 }

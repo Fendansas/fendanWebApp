@@ -17,7 +17,7 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
 
-        <p class="row" th:text="#{soldpoductslist.label.youwont}"><strong>You want to buy next products: </strong></p>
+        <p class="row" th:text="#{soldpoductslist.label.youbuy}"><strong>You bought the following items: </strong></p>
 
     </ul>
 </nav>
@@ -28,34 +28,24 @@
 <div class="container">
     <div class="row">
 
-        <div class="border col-lg-1" ><strong th:text="#{soldpoductslist.label.id}">Id</strong></div>
+        <div class="border col-lg-2" ><strong th:text="#{soldpoductslist.label.id}">Id</strong></div>
         <div class="border col-lg-5" ><strong th:text="#{soldpoductslist.label.name}">Name</strong></div>
         <div class="border col-lg-5" ><strong th:text="#{soldpoductslist.label.price}">Price</strong></div>
-        <div class="border col-lg-1"><strong th:text="#{soldpoductslist.label.delete}">Delete</strong></div>
+
 
     </div>
 
     <div class="row" th:each="product : ${products}">
 
-        <div class="border col-lg-1" th:text="${product.id}"></div>
+        <div class="border col-lg-2" th:text="${product.id}"></div>
         <div class="border col-lg-5" th:text="${product.Name}"></div>
         <div class="border col-lg-5" th:text="${product.price}"></div>
-
-
-
-        <div class="border col-lg-1">
-            <a class="btn btn-link"
-               th:href="@{/sold/{uid}(uid=${product.id})}" th:text="#{soldpoductslist.label.delete}">Delete</a>
-
-        </div>
 
     </div>
 
 </div>
 
 
-    <h2 class="col-md-11" th:inline="text" th:text="#{soldpoductslist.label.total}" >Total:  </h2>
-<div class="col-md-11" th:text="${totalPrice}"></div>
 
 </a>
 
@@ -64,9 +54,7 @@
 <br />
 <br />
 
-<ul class="pagination justify-content-center">
-<a class="btn btn-primary" th:href="@{/sold/apply}" th:text="#{soldpoductslist.label.perform}">Perform Action</a>
-</ul>
+
 
 </body>
 </html>

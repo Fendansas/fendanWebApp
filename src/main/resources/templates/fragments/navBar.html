@@ -23,6 +23,8 @@
                 </a></li>
                 <li class="nav-item"><a class="nav-link" href="/productslist" th:text="#{navbar.label.products}">Products</a></li>
                 <li class="nav-item"><a class="nav-link" href="/sold" th:text="#{navbar.label.cart}">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="/userProducts" th:text="#{navbar.label.purchase}">Purchase history</a></li>
+
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                         role="button" data-toggle="dropdown" aria-haspopup="true"
