@@ -134,9 +134,15 @@ public class JPAUserService implements UserService, InitializingBean {
 //        for (int i = 0; i<products.size(); i++) {
 //            products.add(product);
 //        }
-        user.setProducts(products);
+        //user.setProducts(products);
+        List<Product> oldList = user.getProducts();
+        for (int i = 0; i<products.size();i++) {
+            Product addProduct = products.get(i);
+            oldList.add(addProduct);
+        }
+        user.setProducts(oldList);
         //Integer id = user.getId();
-        repo.save(user);
+        repo.save(user);   //не сохраняет из за одинаковых id
 
 //		products.add(new Product());
 //

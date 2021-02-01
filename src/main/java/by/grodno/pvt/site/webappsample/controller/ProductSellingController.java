@@ -67,9 +67,18 @@ public class ProductSellingController {
     @GetMapping("/sold")
     public String sold(Model model, HttpSession session) {
 
-        List<ProductDTO> attribute = getSoldProducts(session);
+        List<ProductDTO> soldProducts = getSoldProducts(session);
 
-        if (attribute == null) {
+//        BigDecimal totalPrice = null;
+//        for (ProductDTO productDTO : soldProducts) {
+//            BigDecimal x = productDTO.getPrice();
+//            totalPrice.add(x);
+//
+//        }
+ //       System.out.println(totalPrice);
+       // model.addAttribute
+
+        if (soldProducts == null) {
             session.setAttribute("soldProducts", new ArrayList<ProductDTO>());
         }
 
@@ -79,38 +88,30 @@ public class ProductSellingController {
     }
 
     @GetMapping("/sold/apply{user}")
-    public String soldApply(@PathVariable User user, Model model, HttpSession session, Principal principal) {
-        //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //Integer integer;
+    public String soldApply(@PathVariable User user, Model model, HttpSession session) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         System.out.println(username);
-        List<ProductDTO> attribute = getSoldProducts(session);
+        List<ProductDTO> soldProducts = getSoldProducts(session);
 
         Optional<User> optionalUser = userService.findByEmail(username);
         User user1 = optionalUser.isPresent() ? optionalUser.get() : new User();
 
-        List<Product> test = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
+
+       // BigDecimal g; g.add(new BigDecimal(12));
 
         //////////////////////////////////////////////////////
-        for (ProductDTO customer : attribute) {
-            Product product = productService.getProduct(customer.getId());//получаю id по id иду в базу
+        for (ProductDTO productDTO : soldProducts) {
+            Product product = productService.getProduct(productDTO.getId());//получаю id по id иду в базу
             if (product.getQuantity() > 0) {
                 product.setQuantity(product.getQuantity() - 1); // проверяю если остаток не 0 // -1 продук
-                test.add(product);
-                //добавляю продук в пользователя
-//
+                products.add(product);
                 productService.saveProduct(product); //сохраняю продукт
-//
-                 //User user = userService.getUser(id);
-//
-//                userService.saveUser(user);  //сохраняю пользователя
-
             }
-
-
         }
-        userService.addProductToUser(test,user1);
+        userService.addProductToUser(products,user1);
         //userService.addProductToUser(products); // сделать метод добавляющий продукты в список пользователя
         session.setAttribute("soldProducts", new ArrayList<Product>());
         return "sold";

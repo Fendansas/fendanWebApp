@@ -93,7 +93,7 @@ public class UsersController {
 	@ResponseBody
 	public List<UserDTO> getAllUsers() {
 
-;
+
 		return userService.getUsers().stream().map(u -> convertionService.convert(u, UserDTO.class))
 				.collect(Collectors.toList());
 	}
