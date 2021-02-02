@@ -118,7 +118,7 @@ public class ProductsListController {
         return "redirect:/productslist";
     }
 //Details
-    @GetMapping("/productslist/edit/{id}")
+    @GetMapping("/userProducts/edit/{id}")
     @PreAuthorize("@editUserVouter.checkUserId(authentication,#id)")
     public String details(@PathVariable Integer id, Model model) {
 
