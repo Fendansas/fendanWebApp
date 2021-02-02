@@ -37,16 +37,13 @@ public class Product {
     @OneToOne(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ProductPicture picture;
 
-    //    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn
-     @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-     @JoinColumn(name = "user_id")
-     private User user;
-    //private String gun;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-
-//    @OneToMany(targetEntity=ItemInOrder.class,mappedBy = "product", cascade = CascadeType.REMOVE)
-//    private List<ItemInOrder> itemInOrders;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
 
 }

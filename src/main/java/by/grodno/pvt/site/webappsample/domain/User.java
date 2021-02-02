@@ -57,11 +57,9 @@ public class User {
 
 
 
-//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinTable(
-//			joinColumns = @JoinColumn(name = "o1"),
-//			inverseJoinColumns = @JoinColumn(name = "o2"))
-//	private List<Order> orders;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+	private List<Order> orders;
 
 
 

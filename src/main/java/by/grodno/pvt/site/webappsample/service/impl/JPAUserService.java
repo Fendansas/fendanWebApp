@@ -2,7 +2,7 @@ package by.grodno.pvt.site.webappsample.service.impl;
 
 import java.util.*;
 
-import by.grodno.pvt.site.webappsample.domain.Product;
+import by.grodno.pvt.site.webappsample.domain.*;
 import by.grodno.pvt.site.webappsample.repo.ProductRepo;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import by.grodno.pvt.site.webappsample.domain.User;
-import by.grodno.pvt.site.webappsample.domain.UserCredentials;
-import by.grodno.pvt.site.webappsample.domain.UserRole;
 import by.grodno.pvt.site.webappsample.dto.UserDTO;
 import by.grodno.pvt.site.webappsample.exception.UserNotFoundException;
 import by.grodno.pvt.site.webappsample.repo.UserCredentialsRepo;
@@ -78,7 +75,7 @@ public class JPAUserService implements UserService, InitializingBean {
     }
 
     private User getUser(String email, String firstName) {
-        User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN, null, null);
+        User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN, null, null, null);
         UserCredentials userCredentials = new UserCredentials(null, new Date(), true, "max");
         oldUser.setCredentials(Collections.singletonList(userCredentials));
         return oldUser;
@@ -147,6 +144,11 @@ public class JPAUserService implements UserService, InitializingBean {
 //		products.add(new Product());
 //
 //	repo.save();
+
+    }
+
+    @Override
+    public void addOrderToUser(List<Order> orders, User user) {
 
     }
 
