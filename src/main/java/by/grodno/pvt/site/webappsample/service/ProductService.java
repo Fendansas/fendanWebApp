@@ -12,24 +12,14 @@ import java.util.Optional;
 
 public interface ProductService {
 
+    Boolean isProductInStock(Integer id);
+
     List<Product> getProducts();
 
     Product getProduct(Integer id);
 
-    void addProduct(List<Product> products);
-
     void saveProduct(Product product);
 
-    void deleteProduct(Integer number);
-
-    List<Product> findByExample(Product productSample);
-
-    Page<Product> getPage(Integer pageNum, Integer pageSize);
-
-    List<Product> findByFName(String fname);
-///////////////
-    Optional<Product> findById(Integer id);
-///////////////////
     //Page Products
     Page<Product> getProductPage(Integer pageNum, Integer size, String fieldName, Sort.Direction direction);
 

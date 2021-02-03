@@ -1,9 +1,15 @@
 package by.grodno.pvt.site.webappsample.controller;//package by.grodno.pvt.site.webappsample.controller;
 
 import by.grodno.pvt.site.webappsample.converter.ProductDTOToDomainConverter;
+import by.grodno.pvt.site.webappsample.domain.OrderItem;
 import by.grodno.pvt.site.webappsample.domain.Product;
 import by.grodno.pvt.site.webappsample.domain.User;
+import by.grodno.pvt.site.webappsample.domain.UserOrder;
+import by.grodno.pvt.site.webappsample.dto.OrderItemDTO;
 import by.grodno.pvt.site.webappsample.dto.ProductDTO;
+import by.grodno.pvt.site.webappsample.exception.NotEnoughProductsInStockException;
+import by.grodno.pvt.site.webappsample.exception.UserNotFoundException;
+import by.grodno.pvt.site.webappsample.service.OrderService;
 import by.grodno.pvt.site.webappsample.service.ProductService;
 
 import java.io.PrintStream;
@@ -15,6 +21,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import by.grodno.pvt.site.webappsample.service.SecurityService;
 import by.grodno.pvt.site.webappsample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -30,8 +37,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class ProductSellingController {
 
-    static public final Integer SIZE = 5;
-
     @Autowired
     private ProductService productService;
 
@@ -42,17 +47,46 @@ public class ProductSellingController {
     private UserService userService;
 
     @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
     private ProductDTOToDomainConverter productDTOToDomainConverter;
 
     // Добавление в карзину продуктов
-    @GetMapping("/products/buy/{id}")
-    public String editProductForm(@PathVariable Integer id, HttpSession session) {
+    @GetMapping("/products/order/{id}")
+    public String addToOrder(@PathVariable Integer id, HttpSession session) {
+        if (!productService.isProductInStock(id)) {
+            throw new NotEnoughProductsInStockException();
+        }
+
+        Optional<User> userOptional = userService.findByEmail(securityService.getCurrentUserUsername());
+        if(!userOptional.isPresent()) {
+            throw new UserNotFoundException();
+        }
+        User user = userOptional.get();
+
+        UserOrder order = orderService.getOrCreateOrder(user);
+
+        order.setItems(OrderItem);
+
+        //ордер айтем сервис который умеет создавать ордер айтемы из продуктов
+
+        //добавить ордер айтем в ордер
+
+        //
+
         List<ProductDTO> attribute = getSoldProducts(session);
 
         if (attribute == null) {
             session.setAttribute("soldProducts", new ArrayList<Product>());
         }
-
+// Удостовериться что продукт есть на складе
+        // Если у пользователя нет заказа - ордера - создать заказ
+        // Добавить в заказ данный продукт сделав из него ордер айтем
+        // Положить в хттп сессию ордер айтемы заказа пользователя
         getSoldProducts(session).add(conversionService.convert(productService.getProduct(id), ProductDTO.class));
 
         return "redirect:/productslist";
@@ -130,15 +164,15 @@ public class ProductSellingController {
     @GetMapping("/userProducts")
     public String userProducts(Model model, HttpSession session) {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-
-        Optional<User> optionalUser = userService.findByEmail(username);
-        User user = optionalUser.isPresent() ? optionalUser.get() : new User();
-
-        List<Product> products = user.getProducts();
-        model.addAttribute("products", products);
-        return "userProducts";
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String username = auth.getName();
+//
+//        Optional<User> optionalUser = userService.findByEmail(username);
+//        User user = optionalUser.isPresent() ? optionalUser.get() : new User();
+//
+//        List<Product> products = user.getProducts();
+//        model.addAttribute("products", products);
+         return "userProducts";
     }
 
 

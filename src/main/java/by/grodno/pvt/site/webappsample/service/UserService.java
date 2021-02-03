@@ -3,7 +3,7 @@ package by.grodno.pvt.site.webappsample.service;
 import java.util.List;
 import java.util.Optional;
 
-import by.grodno.pvt.site.webappsample.domain.Order;
+import by.grodno.pvt.site.webappsample.domain.UserOrder;
 import by.grodno.pvt.site.webappsample.domain.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
@@ -33,7 +33,7 @@ public interface UserService {
 
 	void addProductToUser (List<Product> products,User user);
 
-	void addOrderToUser (List<Order> orders, User user);
+	void addOrderToUser (List<UserOrder> orders, User user);
 
 	/**
 	 * Updates FirstName and LastName only.

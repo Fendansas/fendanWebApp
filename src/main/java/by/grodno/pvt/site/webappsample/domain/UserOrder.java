@@ -6,14 +6,17 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "user_order")
 public class UserOrder {
 
@@ -26,8 +29,17 @@ public class UserOrder {
     @Column(name = "created_date")
     private Date creationDate;
 
-    BigDecimal totalPrice;
+    @NotNull
+    @Positive
+    private BigDecimal totalPrice = BigDecimal.ZERO;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private OrderStatus status = OrderStatus.PROCESSING;
+
+    @ManyToOne
     private User user;
+
+    @OneToMany(mappedBy = "order",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<OrderItem> items = new ArrayList<>();
 }

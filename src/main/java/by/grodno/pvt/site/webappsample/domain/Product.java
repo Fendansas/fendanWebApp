@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

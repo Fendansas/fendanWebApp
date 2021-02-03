@@ -2,7 +2,7 @@ package by.grodno.pvt.site.webappsample.exception;
 
 import by.grodno.pvt.site.webappsample.domain.Product;
 
-public class NotEnoughProductsInStockException extends Exception {
+public class NotEnoughProductsInStockException extends RuntimeException {
 
     private static final String DEFAULT_MESSAGE = "Not enough products in stock";
 
@@ -13,5 +13,4 @@ public class NotEnoughProductsInStockException extends Exception {
     public NotEnoughProductsInStockException(Product product) {
         super(String.format("Not enough %s products in stock. Only %d left", product.getName(), product.getQuantity()));
     }
-
 }
