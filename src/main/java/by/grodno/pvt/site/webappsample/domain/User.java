@@ -1,5 +1,6 @@
 package by.grodno.pvt.site.webappsample.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,8 +20,7 @@ import javax.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+
 
 @Data
 @NoArgsConstructor
@@ -51,19 +51,8 @@ public class User {
 	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private UserPicture picture;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	//@Fetch(value = FetchMode.SUBSELECT) // стратегия загрузки, без нее не работает
-	private List<Product> products;
-
-
-
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-
-	private List<Order> orders;
-
-
-
-
-
-
+	@OneToMany( mappedBy = "user",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	private List<UserOrder> orders = new ArrayList<>();
 }
