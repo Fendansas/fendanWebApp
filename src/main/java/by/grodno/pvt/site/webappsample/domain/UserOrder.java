@@ -1,20 +1,21 @@
 package by.grodno.pvt.site.webappsample.domain;//package by.grodno.pvt.site.webappsample.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Subselect;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "user_order")
@@ -30,7 +31,6 @@ public class UserOrder {
     private Date creationDate;
 
     @NotNull
-    @Positive
     @Column(name = "total_price")
     private BigDecimal totalPrice = BigDecimal.ZERO;
 

@@ -58,27 +58,27 @@ public class JPAUserService implements UserService, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-//        repo.save(getUser("max@max.max", "Maxim"));
-//        repo.save(getUser("max1@max.max", "Naxim"));
-//        repo.save(getUser("max2@max.max", "Baxim"));
-//        repo.save(getUser("max3@max.max", "Eaxim"));
-//        repo.save(getUser("max4@max.max", "IMaxim"));
-//        repo.save(getUser("max5@max.max", "Maxim"));
-//        repo.save(getUser("ma6@max.max", "Saxim"));
-//        repo.save(getUser("max7@max.max", "Oaxim"));
-//        repo.save(getUser("max8@max.max", "Maxim"));
-//        repo.save(getUser("max9@max.max", "Waxim"));
-//        repo.save(getUser("max0@max.max", "Maxim"));
-//        repo.save(getUser("max12@max.max", "Aaxim"));
-//        repo.save(getUser("max13@max.max", "Maxim"));
-//        repo.save(getUser("max14@max.max", "Vaxim"));
+        repo.save(getUser("max@max.max", "Maxim"));
+        repo.save(getUser("max1@max.max", "Naxim"));
+        repo.save(getUser("max2@max.max", "Baxim"));
+        repo.save(getUser("max3@max.max", "Eaxim"));
+        repo.save(getUser("max4@max.max", "IMaxim"));
+        repo.save(getUser("max5@max.max", "Maxim"));
+        repo.save(getUser("ma6@max.max", "Saxim"));
+        repo.save(getUser("max7@max.max", "Oaxim"));
+        repo.save(getUser("max8@max.max", "Maxim"));
+        repo.save(getUser("max9@max.max", "Waxim"));
+        repo.save(getUser("max0@max.max", "Maxim"));
+        repo.save(getUser("max12@max.max", "Aaxim"));
+        repo.save(getUser("max13@max.max", "Maxim"));
+        repo.save(getUser("max14@max.max", "Vaxim"));
     }
 
     private User getUser(String email, String firstName) {
-//        User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN, null, null, null);
-//        UserCredentials userCredentials = new UserCredentials(null, new Date(), true, "max");
-//        oldUser.setCredentials(Collections.singletonList(userCredentials));
-      return null;
+        User oldUser = new User(null, firstName, "Naumovich", email, null, UserRole.ADMIN, null, new ArrayList<>());
+        UserCredentials userCredentials = new UserCredentials(null, new Date(), true, "max");
+        oldUser.setCredentials(Collections.singletonList(userCredentials));
+      return oldUser;
     }
 
     @Override

@@ -17,15 +17,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-
-@Data
+@Getter
+@Setter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "user_table")
 public class User {
 
@@ -56,4 +54,5 @@ public class User {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true)
 	private List<UserOrder> orders = new ArrayList<>();
+
 }

@@ -27,25 +27,25 @@
 
 <div class="container">
     <div class="row">
-
-        <div class="border col-lg-1" ><strong th:text="#{soldpoductslist.label.id}">Id</strong></div>
-        <div class="border col-lg-5" ><strong th:text="#{soldpoductslist.label.name}">Name</strong></div>
-        <div class="border col-lg-5" ><strong th:text="#{soldpoductslist.label.price}">Price</strong></div>
-        <div class="border col-lg-1"><strong th:text="#{soldpoductslist.label.delete}">Delete</strong></div>
-
+        <div class="border col-lg-3" ><strong th:text="#{soldpoductslist.label.name}">Name</strong></div>
+        <div class="border col-lg-3" ><strong th:text="#{soldpoductslist.label.price}">Description</strong></div>
+        <div class="border col-lg-2" ><strong th:text="#{soldpoductslist.label.price}">Qantity</strong></div>
+        <div class="border col-lg-2" ><strong th:text="#{soldpoductslist.label.price}">Price</strong></div>
+        <div class="border col-lg-2"><strong th:text="#{soldpoductslist.label.delete}">Delete</strong></div>
     </div>
 
-    <div class="row" th:each="product : ${products}">
+    <div class="row" th:each="orderItem : ${orderItems}">
 
-        <div class="border col-lg-1" th:text="${product.id}"></div>
-        <div class="border col-lg-5" th:text="${product.Name}"></div>
-        <div class="border col-lg-5" th:text="${product.price}"></div>
+        <div class="border col-lg-3" th:text="${orderItem.name}"></div>
+        <div class="border col-lg-3" th:text="${orderItem.description}"></div>
+        <div class="border col-lg-2" th:text="${orderItem.quantity}"></div>
+        <div class="border col-lg-2" th:text="${orderItem.price}"></div>
 
 
 
-        <div class="border col-lg-1">
+        <div class="border col-lg-2">
             <a class="btn btn-link"
-               th:href="@{/sold/{uid}(uid=${product.id})}" th:text="#{soldpoductslist.label.delete}">Delete</a>
+               th:href="@{/sold/{uid}(uid=${orderItem.id})}" th:text="#{soldpoductslist.label.delete}">Delete</a>
 
         </div>
 

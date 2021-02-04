@@ -1,17 +1,18 @@
 package by.grodno.pvt.site.webappsample.domain;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.criterion.Order;
-
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
+@Entity
 @NoArgsConstructor
 @Table(name = "order_item")
 public class OrderItem {
@@ -31,7 +32,7 @@ public class OrderItem {
     private Product product;
 
     @ManyToOne
-    private Order order;
+    private UserOrder order;
 
     public OrderItem(BigDecimal price, @Positive Integer quantity, Product product) {
         this.price = price;

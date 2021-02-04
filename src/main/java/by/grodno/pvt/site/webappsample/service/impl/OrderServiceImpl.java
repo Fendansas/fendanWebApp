@@ -1,6 +1,7 @@
 package by.grodno.pvt.site.webappsample.service.impl;
 
 import by.grodno.pvt.site.webappsample.domain.OrderItem;
+import by.grodno.pvt.site.webappsample.domain.OrderStatus;
 import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.domain.UserOrder;
 import by.grodno.pvt.site.webappsample.repo.OrderRepo;
@@ -19,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public UserOrder getOrCreateOrder(User user) {
-        UserOrder order = repo.findOrderByUserAndStatusProcessing(user);
+        UserOrder order = repo.findOrderByUserAndStatus(user, OrderStatus.PROCESSING);
 
         if (order == null) {
             order = new UserOrder();

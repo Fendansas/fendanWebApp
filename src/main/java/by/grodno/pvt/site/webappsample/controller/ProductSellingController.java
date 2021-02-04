@@ -1,10 +1,7 @@
 package by.grodno.pvt.site.webappsample.controller;//package by.grodno.pvt.site.webappsample.controller;
 
 import by.grodno.pvt.site.webappsample.converter.ProductDTOToDomainConverter;
-import by.grodno.pvt.site.webappsample.domain.OrderItem;
-import by.grodno.pvt.site.webappsample.domain.Product;
-import by.grodno.pvt.site.webappsample.domain.User;
-import by.grodno.pvt.site.webappsample.domain.UserOrder;
+import by.grodno.pvt.site.webappsample.domain.*;
 import by.grodno.pvt.site.webappsample.dto.OrderItemDTO;
 import by.grodno.pvt.site.webappsample.dto.ProductDTO;
 import by.grodno.pvt.site.webappsample.exception.NotEnoughProductsInStockException;
@@ -26,6 +23,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@Transactional
 public class ProductSellingController {
 
     @Autowired
@@ -64,7 +63,7 @@ public class ProductSellingController {
         }
 
         Optional<User> userOptional = userService.findByEmail(securityService.getCurrentUserUsername());
-        if(!userOptional.isPresent()) {
+        if (!userOptional.isPresent()) {
             throw new UserNotFoundException();
         }
         User user = userOptional.get();
@@ -84,8 +83,8 @@ public class ProductSellingController {
     }
 
     private List<OrderItemDTO> getItemsFromSession(HttpSession session) {
-        List<OrderItemDTO> list = (List<OrderItemDTO>) session.getAttribute("soldProducts");
-        if(list == null) {
+        List<OrderItemDTO> list = (List<OrderItemDTO>) session.getAttribute("orderItems");
+        if (list == null) {
             return new ArrayList<>();
         } else {
             return list;
@@ -98,38 +97,48 @@ public class ProductSellingController {
 
         List<OrderItemDTO> orderItems = getItemsFromSession(session);
 
-        model.addAttribute("products", orderItems);
+        model.addAttribute("orderItems", orderItems);
 
         return "soldProductsList";
     }
 
-    @GetMapping("/sold/apply{user}")
-    public String soldApply(@PathVariable User user, Model model, HttpSession session) {
+    @GetMapping("/sold/apply")
+    public String soldApply(Model model, HttpSession session) {
 
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        String username = auth.getName();
-//        System.out.println(username);
-//        List<ProductDTO> soldProducts = getSoldProducts(session);
-//
-//        Optional<User> optionalUser = userService.findByEmail(username);
-//        User user1 = optionalUser.isPresent() ? optionalUser.get() : new User();
-//
-//        List<Product> products = new ArrayList<>();
-//
-//       // BigDecimal g; g.add(new BigDecimal(12));
-//
-//        for (ProductDTO productDTO : soldProducts) {
-//            Product product = productService.getProduct(productDTO.getId());//получаю id по id иду в базу
-//            if (product.getQuantity() > 0) {
-//                product.setQuantity(product.getQuantity() - 1); // проверяю если остаток не 0 // -1 продук
-//                products.add(product);
-//                productService.saveProduct(product); //сохраняю продукт
-//            }
-//        }
-//        userService.addProductToUser(products,user1);
-//
-//        session.setAttribute("soldProducts", new ArrayList<Product>());
-//        return "sold";
+        Optional<User> userOptional = userService.findByEmail(securityService.getCurrentUserUsername());
+        if (!userOptional.isPresent()) {
+            throw new UserNotFoundException();
+        }
+        User user = userOptional.get();
+        for (int i = 0; i < user.getOrders().size(); i++) {
+            UserOrder order = user.getOrders().get(i);
+            if(order.getStatus() != OrderStatus.COMPLETED) {
+                //
+
+
+                order.setStatus(OrderStatus.COMPLETED);
+                //TODO save order
+            }
+        }
+
+
+
+        List<Product> products = new ArrayList<>();
+
+        // BigDecimal g; g.add(new BigDecimal(12));
+
+        for (ProductDTO productDTO : soldProducts) {
+            Product product = productService.getProduct(productDTO.getId());//получаю id по id иду в базу
+            if (product.getQuantity() > 0) {
+                product.setQuantity(product.getQuantity() - 1); // проверяю если остаток не 0 // -1 продук
+                products.add(product);
+                productService.saveProduct(product); //сохраняю продукт
+            }
+        }
+        userService.addProductToUser(products, user1);
+
+        session.setAttribute("orderItems", new ArrayList<Product>());
+        return "sold";
 
         return null;
     }
@@ -145,6 +154,8 @@ public class ProductSellingController {
         for (OrderItemDTO orderItemDTO : attribute) {
             if (orderItemDTO.getId().equals(id)) {
                 attribute.remove(orderItemDTO);
+                //TODO remove orderItem from order
+
                 return "redirect:/sold";
             }
         }
@@ -164,7 +175,7 @@ public class ProductSellingController {
 //
 //        List<Product> products = user.getProducts();
 //        model.addAttribute("products", products);
-         return "userProducts";
+        return "userProducts";
     }
 }
 
