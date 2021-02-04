@@ -27,9 +27,9 @@ public class JPAProductService implements ProductService, InitializingBean {
     private ProductRepo repo;
 
     @Override
-    public Boolean isProductInStock(Integer id) {
+    public Boolean isProductInStock(Integer id, Integer quantity) {
         Product product = getProduct(id);
-        return product.getQuantity() > 0;
+        return product.getQuantity() > 0 && product.getQuantity() > quantity;
     }
 
     @Override
@@ -56,22 +56,22 @@ public class JPAProductService implements ProductService, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-//        Product product1 = new Product(null, "AK-47", "The best of the best",null, new BigDecimal(500), 5,null,null, null);
-//        repo.save(product1);
-//        Product product2 = new Product(null, "M4", "US ARMY",null, new BigDecimal(500),5,null, null,null);
-//        repo.save(product2);
-//        Product product3 = new Product(null, "G3", "7.62*51",null, new BigDecimal(500),5,null,null,null);
-//        repo.save(product3);
-//        Product product4 = new Product(null, "G36", "Germany",null, new BigDecimal(500),5,null,null,null);
-//        repo.save(product4);
-//        Product product5 = new Product(null, "M1911", "Colt",null, new BigDecimal(500),5,null,null,null);
-//        repo.save(product5);
-//        Product product6 = new Product(null, "PM", "RF",null, new BigDecimal(500),5,null,null,null);
-//        repo.save(product6);
-//        Product product7 = new Product(null, "G17", "Glock",null, new BigDecimal(500),5,null,null,null);
-//        repo.save(product7);
-//        Product product8 = new Product(null, "P99", "Walter",null, new BigDecimal(500),5,null,null,null);
-//        repo.save(product8);
+        Product product1 = new Product(null, "AK-47", "The best of the best", null, new BigDecimal(500), 5, null);
+        repo.save(product1);
+        Product product2 = new Product(null, "M4", "US ARMY", null, new BigDecimal(500), 5, null);
+        repo.save(product2);
+        Product product3 = new Product(null, "G3", "7.62*51", null, new BigDecimal(500), 5, null);
+        repo.save(product3);
+        Product product4 = new Product(null, "G36", "Germany", null, new BigDecimal(500), 5, null);
+        repo.save(product4);
+        Product product5 = new Product(null, "M1911", "Colt", null, new BigDecimal(500), 5, null);
+        repo.save(product5);
+        Product product6 = new Product(null, "PM", "RF", null, new BigDecimal(500), 5, null);
+        repo.save(product6);
+        Product product7 = new Product(null, "G17", "Glock", null, new BigDecimal(500), 5, null);
+        repo.save(product7);
+        Product product8 = new Product(null, "P99", "Walter", null, new BigDecimal(500), 5, null);
+        repo.save(product8);
 
     }
 
@@ -85,12 +85,6 @@ public class JPAProductService implements ProductService, InitializingBean {
     public void saveProduct(Product product) {
         repo.save(product);
 
-    }
-
-
-    @Override
-    public Optional<Product> findById(Integer id) {
-        return repo.findById(id);
     }
 
     @Override

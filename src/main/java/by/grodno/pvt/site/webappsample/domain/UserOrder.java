@@ -31,6 +31,7 @@ public class UserOrder {
 
     @NotNull
     @Positive
+    @Column(name = "total_price")
     private BigDecimal totalPrice = BigDecimal.ZERO;
 
     private OrderStatus status = OrderStatus.PROCESSING;
@@ -42,4 +43,9 @@ public class UserOrder {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
+
+    public void addOrderItem(OrderItem orderItem) {
+        this.totalPrice = totalPrice.add(orderItem.getPrice());
+        this.items.add(orderItem);
+    }
 }

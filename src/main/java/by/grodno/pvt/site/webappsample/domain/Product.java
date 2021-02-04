@@ -18,15 +18,15 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "name")
     private String name;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
     private String avatarFileName;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "price")
     private BigDecimal price;
 
     @Column(name = "quantity", nullable = false)

@@ -1,5 +1,6 @@
 package by.grodno.pvt.site.webappsample.service.impl;
 
+import by.grodno.pvt.site.webappsample.domain.OrderItem;
 import by.grodno.pvt.site.webappsample.domain.User;
 import by.grodno.pvt.site.webappsample.domain.UserOrder;
 import by.grodno.pvt.site.webappsample.repo.OrderRepo;
@@ -28,4 +29,12 @@ public class OrderServiceImpl implements OrderService {
 
         return order;
     }
+
+    @Override
+    public UserOrder addOrderItem(UserOrder order, OrderItem item) {
+        order.addOrderItem(item);
+        return repo.save(order);
+    }
+
+
 }

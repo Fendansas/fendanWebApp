@@ -10,10 +10,9 @@ import org.hibernate.criterion.Order;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
-//сделать дто
+
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "order_item")
 public class OrderItem {
 
@@ -21,11 +20,11 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "price")
     private BigDecimal price;
 
     @Positive
-    @Column(nullable = false)
+    @Column(nullable = false,name = "quantity")
     private Integer quantity;
 
     @OneToOne
@@ -33,4 +32,10 @@ public class OrderItem {
 
     @ManyToOne
     private Order order;
+
+    public OrderItem(BigDecimal price, @Positive Integer quantity, Product product) {
+        this.price = price;
+        this.quantity = quantity;
+        this.product = product;
+    }
 }

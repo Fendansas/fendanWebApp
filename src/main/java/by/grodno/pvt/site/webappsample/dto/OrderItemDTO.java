@@ -9,11 +9,11 @@ public class OrderItemDTO {
 
     private Integer id;
 
+    private Integer quantity;
+
     private BigDecimal price;
 
     private String name;
 
     private String description;
-
-
 }

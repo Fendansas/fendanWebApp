@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    Boolean isProductInStock(Integer id);
+    Boolean isProductInStock(Integer id, Integer quantity);
 
     List<Product> getProducts();
 

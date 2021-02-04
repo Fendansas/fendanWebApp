@@ -32,12 +32,13 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
+	@Column(name = "first_name")
 	private String firstName;
+	@Column(name = "last_name")
 	private String lastName;
 
 	@Email
-	@Column(unique = true)
+	@Column(unique = true,name = "email")
 	private String email;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
