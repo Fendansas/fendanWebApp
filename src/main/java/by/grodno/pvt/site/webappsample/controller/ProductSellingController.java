@@ -6,6 +6,9 @@ import by.grodno.pvt.site.webappsample.dto.OrderItemDTO;
 import by.grodno.pvt.site.webappsample.dto.ProductDTO;
 import by.grodno.pvt.site.webappsample.exception.NotEnoughProductsInStockException;
 import by.grodno.pvt.site.webappsample.exception.UserNotFoundException;
+import by.grodno.pvt.site.webappsample.repo.OrderItemRepo;
+import by.grodno.pvt.site.webappsample.repo.OrderRepo;
+import by.grodno.pvt.site.webappsample.repo.ProductRepo;
 import by.grodno.pvt.site.webappsample.service.*;
 
 import java.io.PrintStream;
@@ -38,7 +41,16 @@ public class ProductSellingController {
     private ProductService productService;
 
     @Autowired
+    private ProductRepo productRepo;
+
+    @Autowired
     private OrderItemService orderItemService;
+
+    @Autowired
+    private OrderItemRepo orderItemRepo;
+
+    @Autowired
+    private OrderRepo repo;
 
     @Autowired
     private ConversionService conversionService;
@@ -112,35 +124,24 @@ public class ProductSellingController {
         User user = userOptional.get();
         for (int i = 0; i < user.getOrders().size(); i++) {
             UserOrder order = user.getOrders().get(i);
-            if(order.getStatus() != OrderStatus.COMPLETED) {
-                //
-
-
+            if (order.getStatus() != OrderStatus.COMPLETED) {
+                for (int j = 0; j < order.getItems().size(); j++) {
+                    OrderItem orderItem = order.getItems().get(j);
+                    Product product = orderItem.getProduct();
+                    //product.setQuantity(product.getQuantity() - 1);
+                    product.setQuantity(product.getQuantity()-1);
+                    productRepo.save(product);
+                    //productService.saveProduct(product);
+                }
                 order.setStatus(OrderStatus.COMPLETED);
-                //TODO save order
+                repo.save(order);
             }
         }
-
-
-
-        List<Product> products = new ArrayList<>();
-
-        // BigDecimal g; g.add(new BigDecimal(12));
-
-        for (ProductDTO productDTO : soldProducts) {
-            Product product = productService.getProduct(productDTO.getId());//получаю id по id иду в базу
-            if (product.getQuantity() > 0) {
-                product.setQuantity(product.getQuantity() - 1); // проверяю если остаток не 0 // -1 продук
-                products.add(product);
-                productService.saveProduct(product); //сохраняю продукт
-            }
-        }
-        userService.addProductToUser(products, user1);
 
         session.setAttribute("orderItems", new ArrayList<Product>());
         return "sold";
 
-        return null;
+
     }
 
 
@@ -149,11 +150,27 @@ public class ProductSellingController {
     @GetMapping("/sold/{id}")
     public String soldDelete(@PathVariable Integer id, Model model, HttpSession session) {
 
+        Optional<User> userOptional = userService.findByEmail(securityService.getCurrentUserUsername());
+        if (!userOptional.isPresent()) {
+            throw new UserNotFoundException();
+        }
+
         List<OrderItemDTO> attribute = getItemsFromSession(session);
 
         for (OrderItemDTO orderItemDTO : attribute) {
             if (orderItemDTO.getId().equals(id)) {
                 attribute.remove(orderItemDTO);
+
+                User user = userOptional.get();
+                for (int i = 0; i < user.getOrders().size(); i++) {
+                    UserOrder order = user.getOrders().get(i);
+                    if (order.getStatus() != OrderStatus.COMPLETED) {
+                        for (int j = 0; j < order.getItems().size(); j++) {
+                            OrderItem orderItem = order.getItems().get(j);
+                            orderItemRepo.delete(orderItem);
+                        }
+                    }
+                }
                 //TODO remove orderItem from order
 
                 return "redirect:/sold";
@@ -163,20 +180,7 @@ public class ProductSellingController {
     }
 
 
-    // список продуктов в карзине
-    @GetMapping("/userProducts")
-    public String userProducts(Model model, HttpSession session) {
 
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        String username = auth.getName();
-//
-//        Optional<User> optionalUser = userService.findByEmail(username);
-//        User user = optionalUser.isPresent() ? optionalUser.get() : new User();
-//
-//        List<Product> products = user.getProducts();
-//        model.addAttribute("products", products);
-        return "userProducts";
-    }
 }
 
 

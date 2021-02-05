@@ -25,7 +25,6 @@ public class AddProduct {
     @Autowired
     private ConversionService convertionService;
 
-
     @GetMapping("/addProduct")
     String getForm(ProductDTO productDTO, Model model) {
         if (productDTO == null) {
@@ -44,24 +43,11 @@ public class AddProduct {
             return "redirect:/addProduct";
         }
 
-
         service.saveProduct(convertionService.convert(productDTO, Product.class));
-
 
         return "redirect:/products";
     }
 
 
-//    @PostMapping("/addProduct/new")
-//    String registerPage(@Valid ProductDTO productDTO, BindingResult bindingResult, Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("productRegistrationDTO", productDTO);
-//            return "registerView";
-//        }
-//
-//        service.saveProduct(convertionService.convert(productDTO, Product.class));
-//
-//        return "redirect:/products";
-//    }
+
 }
